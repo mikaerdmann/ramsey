@@ -109,6 +109,15 @@ def f_pm_4ts(m, t):  # dt average over 4 neighbouring time steps
     else:
         return m.pm_dt[t]
 
+def f_pm_ts09(m,t):
+    if t>1:
+        if m.pm_dt[t]-m.pm_dt[t-1] == 0:
+            return f_pm_ts(m,t)
+        else:
+            return 0.9 * f_pm_ts(m,t)
+    else:
+        return f_pm_ts(m,t)
+
 
 def f_pm_welf(m,t):  # uses the welf.weight switch and returns the adequate function for initializing model.pm_welf
     if m.welf_weight == 0:
@@ -118,7 +127,7 @@ def f_pm_welf(m,t):  # uses the welf.weight switch and returns the adequate func
     if m.welf_weight == 2:
         return f_pm_4ts(m, t)
     if m.welf_weight == 3:
-        return 0.9 * f_pm_ts(m,t)
+        return f_pm_ts09(m,t)  # 0.9 nur für zeitsprung
 
 
 def f_cumdepr_old(m,t):  # switch function for old
@@ -250,13 +259,22 @@ def f_cons_initialize(m,t):
     return vm_cons_0[t]
 
 
-def f_utility(cons, ies):
+def f_utility(cons, ies):  # falschh wegen np.log
     cons = np.asarray(cons)
     if ies != 1:
         utility = (cons ** (1 - 1 / ies) - 1) / (1 - 1 / ies)
     if ies == 1:
         utility = np.log(cons)
     return utility
+
+def f_vm_utility(m,t):
+    return (m.vm_cons[t]**(1-1/m.pm_ies)-1)/(1-1/m.pm_ies)
+
+def f_vm_utilitylog(m,t):
+    return np.log(m.vm_cons[t].value)
+
+def f_initialize_welf(m,t):
+    return (1 / (1 + m.pm_prtp)) ** (m.pm_tall_val[t] - 2005) * m.pm_pop * m.vm_utility[t] * m.pm_welf[t]
 
 
 def f_prod(cesIO, delta_kap):

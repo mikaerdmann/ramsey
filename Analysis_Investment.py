@@ -12,7 +12,7 @@ import pyomo.environ as pyo
 # Comparison between the different investment representations
 
 # Set Parameters:
-t: int = 3  # Time representation
+t: int = 2  # Time representation
 weights: list = [1]  # Welfare weighting parameter # List with len(weights) = 1 !
 investment: list = [1,2,3,4,5]  # investment representation
 

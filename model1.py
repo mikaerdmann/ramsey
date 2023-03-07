@@ -1,7 +1,6 @@
 '''
 Author: Mika Erdmann
 Project: Ramsey-Model and time steps
-This script is the main script
 '''
 
 import pyomo.environ as pyo
@@ -9,6 +8,7 @@ import model1_functions as func
 from pyomo.opt import SolverFactory
 from pyomo.opt import SolverStatus, TerminationCondition
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Different time definitions
 # 1: 5 year time steps
@@ -73,20 +73,34 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
                             initialize=model.sm_cesIO / 3)
     model.vm_invMacro = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-3, None),
                                 initialize= 0)
-    #model.cuminv = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds = (1e-3, None),
-    #                       initialize= func.f_cum_inv)
+    model.vm_utility = pyo.Var(model.Tall, domain= pyo.NonNegativeReals, bounds=(1e-3, None), initialize= func.f_vm_utilitylog)
 
-    model.v_welfare = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1e-3, 500000))
+    model.vm_welfare_t = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-3, 500000), initialize= func.f_initialize_welf)
+    model.v_welfare = pyo.Var(domain=pyo.NonNegativeReals, bounds = (1e-3, 500000), initialize=0)
 
     # Objective
-    def obj_expression(m):  # as input this function has the model
-        cons = [m.vm_cons[i].value for i in range(0, len(m.Tall))]
-        utility = func.f_utility(cons, m.pm_ies.value)
-        welfare_t = [((1 / (1 + m.pm_prtp)) ** (m.pm_tall_val[i] - 2005) * m.pm_pop * utility[i] * m.pm_welf[i]) for i in range(0, len(utility))]
-        welfare = sum(welfare_t)
-        return welfare
+    def obj_expression(m):
+        # cons = [m.vm_cons[i].value for i in range(0, len(m.Tall))]
+        # utility = func.f_utility(cons, m.pm_ies.value)
+        # welfare_t = [((1 / (1 + m.pm_prtp)) ** (m.pm_tall_val[i] - 2005) * m.pm_pop * utility[i] * m.pm_welf[i]) for i in range(0, len(utility))]  # stattdessen t??
+        # welfare = sum(welfare_t)
+        return pyo.summation(m.vm_welfare_t) # has as input a seperate variable that saves the welfare of every timestep
 
     # Constraints
+
+    def welfare_t_rule(m,t):  # computes the welfare of every time step based on the seperate variable vm_utility, that is computed for every timestep
+        return m.vm_welfare_t[t] == (1 / (1 + m.pm_prtp)) ** (m.pm_tall_val[t] - 2005) * m.pm_pop * m.vm_utility[t] * m.pm_welf[t]
+
+
+    def welfare_rule(m):
+        return m.v_welfare == pyo.summation(m.vm_welfare_t)  # cpmputes the objective value in a variable (not used in OBJ, only for easier retrieving of Objective Value
+
+    def utility_rule(m,t):  # computes the utility of every time step based on the consumption level inn that period
+        if m.pm_ies == 1:
+            return m.vm_utility[t] == pyo.log(m.vm_cons[t])
+        else:
+            return m.vm_utility[t] == (m.vm_cons[t] ** (1 - 1 / m.pm_ies) - 1) / (1 - 1 / m.pm_ies)
+
 
     def production_constraint_rule(m, t):
         # return the expression for the production constraint for each t
@@ -103,11 +117,14 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     model.OBJ = pyo.Objective(rule=obj_expression, sense=pyo.maximize)
 
     # the next line creates one constraint for each member of the set model.Tall
+    model.welf_constraint = pyo.Constraint(model.Tall, rule= welfare_t_rule)
+    model.welf_constraint2 = pyo.Constraint(rule=welfare_rule)
+    model.utility_constraint = pyo.Constraint(model.Tall, rule= utility_rule)
     model.prod_Constraint = pyo.Constraint(model.Tall,
                                            rule=production_constraint_rule)  # here the time is used as a range for the constraints
     model.cap_Constraint = pyo.Constraint(range(0, model.N.value),
                                           rule=capital_constraint_rule)  # here a range
-
+    # The next lines solve the model
     opt = SolverFactory('ipopt', executable="C:\\Ipopt-3.14.11-win64-msvs2019-md\\bin\\ipopt.exe")
     # opt.set_options("halt_on_ampl_error=yes")
     # opt.options['print_level'] = 5
@@ -118,11 +135,12 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
             results.solver.termination_condition == TerminationCondition.optimal):
         print("this is feasible and optimal")
     elif results.solver.termination_condition == TerminationCondition.infeasible:
-        print("do something about it? or exit?")
+        print("infeasible: termination")
     else:
         # something else is wrong
         print(str(results.solver))
     return model
 
-model = run_model(timeswitch=3, weight=1, depr= 3)
-
+model = run_model(timeswitch=2, weight=1, depr= 3)
+print(pyo.summation(model.vm_welfare_t))
+model.pm_welf.pprint()
