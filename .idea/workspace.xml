@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ramsey.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ramsey.iml" afterDir="false" />
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.3. Updates welf parameters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis_Investment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_Investment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis_welf.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_welf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model1_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model2_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/model2_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +83,18 @@
       <option name="presentableId" value="Default" />
       <updated>1678191237077</updated>
     </task>
+    <task id="LOCAL-00001" summary="7.3. Updates welf parameters">
+      <created>1678198813791</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678198813792</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="7.3. Updates welf parameters" />
+    <option name="LAST_COMMIT_MESSAGE" value="7.3. Updates welf parameters" />
   </component>
 </project>
