@@ -7,14 +7,13 @@ This script analyses the different welfare weight representations
 import matplotlib.pyplot as plt
 import main_run as main
 import pyomo.environ as pyo
-import model1_functions as func
 
 # Comparison between the different welfare weight representations
 
 # Set Parameters
 t: int = 2
 weights: list = [0,1,2,3]
-investment: int = 2
+investment: int = 3
 
 # Visualisation of model runs in a loop
 plt.figure()
@@ -27,7 +26,6 @@ for i in range(0, len(weights)):
     cap_opt_dict = model.vm_cesIO.get_values()
     inv_opt_dict = model.vm_invMacro.get_values()
 
-    print("Welfare for this solution: ", pyo.value(model.OBJ))
     # Convert object to a list
     result_cons = cons_opt_dict.values()
     cons_opt = list(result_cons)
@@ -37,12 +35,13 @@ for i in range(0, len(weights)):
     inv_opt = list(results_inv)
     pm_tall_val = model.pm_tall_val.extract_values()
     tall_int = list(pm_tall_val.values())
+    print(cons_opt)
     # Axis creation
     plt.subplot(4, 3, counter)
     plt.plot(tall_int, cons_opt, 'b')
     plt.legend("Consumption")
     plt.subplot(4,3,counter+1)
-    plt.title(f"Time Rep:, {t}. Welf_weight: {i}.", loc= "center")
+    plt.title(f"Time: {t}. Welf_weight: {i}. Welfare: {pyo.value(model.v_welfare)}", loc= "center")
     plt.plot(tall_int, cap_opt, 'k')
     plt.legend("Kapital")
     plt.subplot(4,3,counter+2)
