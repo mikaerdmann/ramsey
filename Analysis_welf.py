@@ -11,9 +11,9 @@ import pyomo.environ as pyo
 # Comparison between the different welfare weight representations
 
 # Set Parameters
-t: int = 2
-weights: list = [0,1,2,3]
-investment: int = 3
+t: int = 3
+weights: list = [0,1,2,4]
+investment: int = 2
 
 # Visualisation of model runs in a loop
 plt.figure()
@@ -41,7 +41,7 @@ for i in range(0, len(weights)):
     plt.plot(tall_int, cons_opt, 'b')
     plt.legend("Consumption")
     plt.subplot(4,3,counter+1)
-    plt.title(f"Time: {t}. Welf_weight: {i}. Welfare: {pyo.value(model.v_welfare)}", loc= "center")
+    plt.title(f"Time: {t}. Welf_weight: {weights[i]}. Welfare: {pyo.value(model.v_welfare)}", loc= "center")
     plt.plot(tall_int, cap_opt, 'k')
     plt.legend("Kapital")
     plt.subplot(4,3,counter+2)

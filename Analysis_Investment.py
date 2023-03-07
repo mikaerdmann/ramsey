@@ -13,7 +13,7 @@ import pyomo.environ as pyo
 
 # Set Parameters:
 t: int = 2  # Time representation
-weights: list = [1]  # Welfare weighting parameter # List with len(weights) = 1 !
+weights: list = [3]  # Welfare weighting parameter # List with len(weights) = 1 !
 investment: list = [1,2,3,4,5]  # investment representation
 
 

@@ -118,7 +118,11 @@ def f_pm_ts09(m,t):
     else:
         return f_pm_ts(m,t)
 
-
+def f_pm_welf_experiment(m, t):
+    if t < m.N / 2:
+        return 100
+    else:
+        return 1
 def f_pm_welf(m,t):  # uses the welf.weight switch and returns the adequate function for initializing model.pm_welf
     if m.welf_weight == 0:
         return 1
@@ -128,6 +132,8 @@ def f_pm_welf(m,t):  # uses the welf.weight switch and returns the adequate func
         return f_pm_4ts(m, t)
     if m.welf_weight == 3:
         return f_pm_ts09(m,t)  # 0.9 nur für zeitsprung
+    if m.welf_weight == 4:
+        return f_pm_welf_experiment(m, t)
 
 
 def f_cumdepr_old(m,t):  # switch function for old
