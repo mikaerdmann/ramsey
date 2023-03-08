@@ -108,8 +108,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
 
     def capital_constraint_rule(m,t):
         if m.pm_tall_val[t] > m.pm_firstyear:
-            # cum_inv: how much investment is left from the other periods
-            return m.vm_cesIO[t] == (1 - m.pm_delta_kap) ** (m.pm_tall_val[t] - m.pm_tall_val[t - 1]) * m.vm_cesIO[t - 1] + func.f_cum_inv(m, t)  # or cuminv[t]
+            return m.vm_cesIO[t] == (1 - m.pm_delta_kap) ** (m.pm_tall_val[t] - m.pm_tall_val[t - 1]) * m.vm_cesIO[t - 1] + m.pm_cumdepr_old[t] * m.vm_invMacro[t - 1] + m.pm_cumdepr_new[t] * m.vm_invMacro[t]
         else:
             return m.vm_cesIO[t] == m.sm_cesIO + m.pm_cumdepr_new[t] * m.vm_invMacro[t]
 
@@ -127,7 +126,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     # The next lines solve the model
     opt = SolverFactory('ipopt', executable="C:\\Ipopt-3.14.11-win64-msvs2019-md\\bin\\ipopt.exe")
     # opt.set_options("halt_on_ampl_error=yes")
-    # opt.options['print_level'] = 5
+    opt.options['print_level'] = 6
     # opt.options['output_file'] = "C:\\Users\\mikae\\PycharmProjects\\Ramseyvenv\\my_ipopt_log.txt"
     results = opt.solve(model, tee=True)
     # Solver result analisis

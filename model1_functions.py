@@ -256,11 +256,11 @@ def f_cumdepr_new_4(m, t):
 #     return inv_lin
 
 # Switch function for the whole cumulative investment function (inlcuding regressions)
-def f_cum_inv(m, t):
-    if m.invreg == 1:
-        raise AttributeError  # Zurzeit nutzt dieses Model nicht cumulative Investment regressions (siehe model version2)
-    else:
-        return f_cum_inv_oldnew(m, t)
+# def f_cum_inv(m, t):  # not used
+#     if m.invreg == 1:
+#         raise AttributeError  # Zurzeit nutzt dieses Model nicht cumulative Investment regressions (siehe model version2)
+#     else:
+#         return f_cum_inv_oldnew(m, t)
 
 
 #
@@ -269,9 +269,9 @@ def f_cum_inv(m, t):
 #     cum_investment = sum((1 - m.pm_delta_kap) * inv_lin)
 #     return cum_investment
 
-def f_cum_inv_oldnew(m, t):
-    investment = m.pm_cumdepr_old[t] * m.vm_invMacro[t - 1] + m.pm_cumdepr_new[t] * m.vm_invMacro[t]
-    return investment
+# def f_cum_inv_oldnew(m, t):
+#     investment = m.pm_cumdepr_old[t] * m.vm_invMacro[t - 1] + m.pm_cumdepr_new[t] * m.vm_invMacro[t]
+#     return investment
 
     # bounds
 
