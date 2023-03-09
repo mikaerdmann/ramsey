@@ -28,14 +28,10 @@ import numpy as np
 # 3: regression 1
 # 4: regression 2
 
-# Regression
-# 1: Mikas Regression 1
-# 0: use cum. depreciation factors
-
 def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     model = pyo.ConcreteModel()
     # Tall switch
-    model.time = timeswitch  # change this to the above representations
+    model.time = timeswitch
     tall_string = func.f_tall_string(model)
     model.welf_weight = weight
     model.depr = depr
@@ -60,7 +56,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     model.pm_ies = pyo.Param(initialize=0.9)  # default = 1
     model.pm_pop = pyo.Param(initialize=1)  # default = 1
     model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
-    model.sm_cesIO = pyo.Param(initialize=2)  # default = 25
+    model.sm_cesIO = pyo.Param(initialize=25)  # default = 25
 
     # deprec factors
     model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=func.f_cumdepr_new)  # 0 or func.f_cumdepr_new
@@ -126,7 +122,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     # The next lines solve the model
     opt = SolverFactory('ipopt', executable="C:\\Ipopt-3.14.11-win64-msvs2019-md\\bin\\ipopt.exe")
     # opt.set_options("halt_on_ampl_error=yes")
-    opt.options['print_level'] = 6
+    #opt.options['print_level'] = 6
     # opt.options['output_file'] = "C:\\Users\\mikae\\PycharmProjects\\Ramseyvenv\\my_ipopt_log.txt"
     results = opt.solve(model, tee=True)
     # Solver result analisis

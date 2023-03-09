@@ -300,12 +300,12 @@ def f_cons_initialize(m, t):
     return vm_cons_0[t]
 
 
-def f_utility(cons, ies):  # falsch wegen np.log
-    if ies != 1:
-        utility = (cons ** (1 - 1 / ies) - 1) / (1 - 1 / ies)
-    if ies == 1:
-        utility = pyo.log(cons)
-    return utility
+# def f_utility(cons, ies):  # falsch wegen np.log
+#     if ies != 1:
+#         utility = (cons ** (1 - 1 / ies) - 1) / (1 - 1 / ies)
+#     if ies == 1:
+#         utility = pyo.log(cons)
+#     return utility
 
 
 def f_vm_utility(m, t):
