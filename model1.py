@@ -57,10 +57,10 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     model.pm_welf = pyo.Param(model.Tall, initialize=func.f_pm_welf)  # model.pm_ts or 1 or model.pm_4ts
     model.pm_delta_kap = pyo.Param(initialize=0.05)  # default = 0.05
     model.pm_cap_expo = pyo.Param(initialize=0.5)  # default = 0.5
-    model.pm_ies = pyo.Param(initialize=1)  # default = 1
+    model.pm_ies = pyo.Param(initialize=0.9)  # default = 1
     model.pm_pop = pyo.Param(initialize=1)  # default = 1
     model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
-    model.sm_cesIO = pyo.Param(initialize=25)  # default = 25
+    model.sm_cesIO = pyo.Param(initialize=2)  # default = 25
 
     # deprec factors
     model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=func.f_cumdepr_new)  # 0 or func.f_cumdepr_new
@@ -89,7 +89,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     # Constraints
 
     def welfare_t_rule(m,t):  # computes the welfare of every time step based on the seperate variable vm_utility, that is computed for every timestep
-        return m.vm_welfare_t[t] == (1 / (1 + m.pm_prtp)) ** (m.pm_tall_val[t] - 2005) * m.pm_pop * m.vm_utility[t] * m.pm_welf[t]
+        return m.vm_welfare_t[t] == 1 / (1 + m.pm_prtp) ** (m.pm_tall_val[t] - 2005) * m.pm_pop * m.vm_utility[t] * m.pm_welf[t]
 
 
     def welfare_rule(m):
@@ -104,11 +104,11 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
 
     def production_constraint_rule(m, t):
         # return the expression for the production constraint for each t
-        return m.vm_cons[t] + m.vm_invMacro[t] == func.f_prod(m.vm_cesIO[t], m.pm_cap_expo)
+        return m.vm_cons[t] + m.vm_invMacro[t] == m.vm_cesIO[t] ** m.pm_cap_expo
 
     def capital_constraint_rule(m,t):
         if m.pm_tall_val[t] > m.pm_firstyear:
-            return m.vm_cesIO[t] == (1 - m.pm_delta_kap) ** (m.pm_tall_val[t] - m.pm_tall_val[t - 1]) * m.vm_cesIO[t - 1] + m.pm_cumdepr_old[t] * m.vm_invMacro[t - 1] + m.pm_cumdepr_new[t] * m.vm_invMacro[t]
+            return m.vm_cesIO[t] == (1 - m.pm_delta_kap) ** m.pm_dt[t] * m.vm_cesIO[t - 1] + m.pm_cumdepr_old[t] * m.vm_invMacro[t - 1] + m.pm_cumdepr_new[t] * m.vm_invMacro[t]
         else:
             return m.vm_cesIO[t] == m.sm_cesIO + m.pm_cumdepr_new[t] * m.vm_invMacro[t]
 
@@ -120,9 +120,9 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     model.welf_constraint2 = pyo.Constraint(rule=welfare_rule)
     model.utility_constraint = pyo.Constraint(model.Tall, rule= utility_rule)
     model.prod_Constraint = pyo.Constraint(model.Tall,
-                                           rule=production_constraint_rule)  # here the time is used as a range for the constraints
-    model.cap_Constraint = pyo.Constraint(range(0, model.N.value),
-                                          rule=capital_constraint_rule)  # here a range
+                                           rule=production_constraint_rule)
+    model.cap_Constraint = pyo.Constraint(model.Tall,
+                                          rule=capital_constraint_rule)
     # The next lines solve the model
     opt = SolverFactory('ipopt', executable="C:\\Ipopt-3.14.11-win64-msvs2019-md\\bin\\ipopt.exe")
     # opt.set_options("halt_on_ampl_error=yes")

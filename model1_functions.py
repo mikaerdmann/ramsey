@@ -96,9 +96,9 @@ def f_pm_ts(m, t):  # returns the average time difference (dt) between the years
     if 0 < t < m.N.value - 1:
         return (m.pm_dt[t] + m.pm_dt[t + 1]) / 2
     if t == 0:
-        return m.pm_dt[t]
+        return float(m.pm_dt[t])
     else:
-        return m.pm_dt[t]
+        return float(m.pm_dt[t])
 
 
 def f_pm_4ts(m, t):  # dt average over 4 neighbouring time steps

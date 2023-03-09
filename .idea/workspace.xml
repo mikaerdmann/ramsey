@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.3. Updates welf parameters">
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.3. Updates model 1 mistakes">
+      <change afterPath="$PROJECT_DIR$/inverse_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model1_inverse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Analysis_welf.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_welf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model1.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model1_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1_functions.py" afterDir="false" />
@@ -14,6 +17,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -52,7 +62,7 @@
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.main_run">
+  <component name="RunManager" selected="Python.inverse_model">
     <configuration name="Analysis_welf" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -63,6 +73,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Analysis_welf.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="inverse_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ramsey" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inverse_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -90,13 +118,15 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.inverse_model" />
       <item itemvalue="Python.main_run" />
       <item itemvalue="Python.Analysis_welf" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_run" />
+        <item itemvalue="Python.inverse_model" />
         <item itemvalue="Python.Analysis_welf" />
+        <item itemvalue="Python.main_run" />
       </list>
     </recent_temporary>
   </component>
@@ -116,11 +146,50 @@
       <option name="project" value="LOCAL" />
       <updated>1678198813792</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="7.3. Updates model 1 mistakes">
+      <created>1678297907699</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678297907699</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="7.3. Updates welf parameters" />
-    <option name="LAST_COMMIT_MESSAGE" value="7.3. Updates welf parameters" />
+    <MESSAGE value="7.3. Updates model 1 mistakes" />
+    <option name="LAST_COMMIT_MESSAGE" value="7.3. Updates model 1 mistakes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/inverse_model.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/inverse_model.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/inverse_model.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/inverse_model.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/inverse_model.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

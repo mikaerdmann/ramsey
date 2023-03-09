@@ -50,3 +50,4 @@ def f_decide(invrep):  # Combines the different modelversions needed for the dif
 
 
 model = run_experiment(2,1,2)
+model.pprint()

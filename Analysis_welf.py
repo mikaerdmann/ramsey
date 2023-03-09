@@ -11,8 +11,8 @@ import pyomo.environ as pyo
 # Comparison between the different welfare weight representations
 
 # Set Parameters
-t: int = 3
-weights: list = [0,1,2,4]
+t: int = 1
+weights: list = [0,1,2,3]
 investment: int = 2
 
 # Visualisation of model runs in a loop
