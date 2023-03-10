@@ -44,41 +44,45 @@ def get_optimal_t(m):  # get only the needed values of vm_opt
     return vm_opt
 
 # optimization of parameters
-def run_model(t):
+def run_model(t):  # TODO: Maybe use TALl as index?
     model = pyo.ConcreteModel()
 
     model.time = t  # the time representaton used in the model for which the parameters should be otpimitzed
     # Time Parameters
     tall_string = model1_functions.f_tall_string(model)
     tall_int = [int(i) for i in tall_string]
-    vm_opt = get_optimal_t(model)
-    model.cons_opt = vm_opt[0]
-    model.cap_opt = vm_opt[1]
-    model.inv_opt = vm_opt[2]
+    vm_opt = get_optimal_t(model)  # TODO write function for this
+    model.cons_opt = pyo.Param(domain=pyo.NonNegativeReals, initialize=vm_opt[0])  # TODO write initialize function for this
+    model.cap_opt = pyo.Param(domain=pyo.NonNegativeReals, initialize=vm_opt[1])
+    model.inv_opt = pyo.Param(domain=pyo.NonNegativeReals, initialize=vm_opt[2])
     # Model time parameters
     model.N = pyo.Param(initialize=len(tall_int))
     model.Tall = pyo.RangeSet(0, model.N - 1)
     # Variables to optimize
-    model.vm_modeloutput = pyo.Var(domain=pyo.NonNegativeReals, initialize= get_optimal_t)
+    model.vm_modeloutput = pyo.Var(domain=pyo.NonNegativeReals, initialize= 1)  # TODO write initialize function
     model.vm_cumdepr_new = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-5, None),
                                    initialize=model1_functions.f_cumdepr_new_2)
     model.vm_cumdepr_old = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-5, None),
                                    initialize=model1_functions.f_cumdepr_old_2)
     model.vm_weight = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds = (1,11), initialize=model1_functions.f_pm_ts)
+    model.vm_cons_run = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1e-3, None), initialize= 1) # TODO write initialize function
+    model.vm_cap_run = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1e-3, None), initialize= 1) # TODO write initialize function
+    model.vm_inv_run = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1e-3, None), initialize= 1) # TODO write initialize function
+
 
     # Objective rule:
     # Small deviation from optimal model output
     # TODO: How to weigh the difference between the three different opt_vms
+
     def objective_rule(m):
-        difference = m.vm_opt-m.vm_modeloutput
-        return difference
+        return ((m.cons_opt - m.vm_cons_run)**2 + (m.cap_opt - m.vm_cap_run)**2 + (m.inv_opt-m.vm_inv_run)**2) **0.5
 
     model.OBJ = pyo.Objective(rule=objective_rule, sense=pyo.minimize)
 
     # Constraints:
 
     # Get model values (in every constraint)
-    def constraint_rule_1(m):
+    def constraint_rule_cons(m):
 
         runmodel = model1_inverse.run_model1_inverse(timeswitch=m.time, vm_weight= m.vm_weight, vm_cumdepr_new_inverse=m.vm_cumdepr_new, vm_cumdepr_old_inverse=m.vm_cumdepr_old)
         cons_dict = runmodel.vm_cons.get_values()
@@ -86,15 +90,50 @@ def run_model(t):
         inv_dict = runmodel.vm_invMacro.get_values()
 
         res_cons = cons_dict.values()
-        model_cons_opt = list(res_cons)
+        model_cons_run = list(res_cons)
         res_cap = cap_dict.values()
-        model_cap_opt = list(res_cap)
+        model_cap_run = list(res_cap)
         res_inv = inv_dict.values()
-        model_inv_opt = list(res_inv)
-        vm_run = [model_cons_opt, model_cap_opt, model_inv_opt]
-        return model.vm_modeloutput == vm_run # TODO Achtung, muss das hier wieder delokalisiert werden
+        model_inv_run = list(res_inv)
+        vm_run = [model_cons_run, model_cap_run, model_inv_run]
+        return model.vm_cons_run == vm_run[0] # TODO Achtung, muss das hier wieder delokalisiert werden
 
-    model.Constraint1 = pyo.Constraint(rule=constraint_rule_1)
+    def constraint_rule_cap(m):
+
+        runmodel = model1_inverse.run_model1_inverse(timeswitch=m.time, vm_weight= m.vm_weight, vm_cumdepr_new_inverse=m.vm_cumdepr_new, vm_cumdepr_old_inverse=m.vm_cumdepr_old)
+        cons_dict = runmodel.vm_cons.get_values()
+        cap_dict = runmodel.vm_cesIO.get_values()
+        inv_dict = runmodel.vm_invMacro.get_values()
+
+        res_cons = cons_dict.values()
+        model_cons_run = list(res_cons)
+        res_cap = cap_dict.values()
+        model_cap_run = list(res_cap)
+        res_inv = inv_dict.values()
+        model_inv_run = list(res_inv)
+        vm_run = [model_cons_run, model_cap_run, model_inv_run]
+        return model.vm_cap_run == vm_run[1] # TODO Achtung, muss das hier wieder delokalisiert werden
+
+    def constraint_rule_inv(m):
+
+        runmodel = model1_inverse.run_model1_inverse(timeswitch=m.time, vm_weight= m.vm_weight, vm_cumdepr_new_inverse=m.vm_cumdepr_new, vm_cumdepr_old_inverse=m.vm_cumdepr_old)
+        cons_dict = runmodel.vm_cons.get_values()
+        cap_dict = runmodel.vm_cesIO.get_values()
+        inv_dict = runmodel.vm_invMacro.get_values()
+
+        res_cons = cons_dict.values()
+        model_cons_run = list(res_cons)
+        res_cap = cap_dict.values()
+        model_cap_run = list(res_cap)
+        res_inv = inv_dict.values()
+        model_inv_run = list(res_inv)
+        vm_run = [model_cons_run, model_cap_run, model_inv_run]
+        return model.vm_inv_run == vm_run[2] # TODO Achtung, muss das hier wieder delokalisiert werden
+
+    model.Constraint_cons = pyo.Constraint(rule=constraint_rule_cons)
+    model.Constraint_cap = pyo.Constraint(rule=constraint_rule_cap)
+    model.Constraint_inv = pyo.Constraint(rule=constraint_rule_inv)
+
 
     opt = SolverFactory('ipopt', executable="C:\\Ipopt-3.14.11-win64-msvs2019-md\\bin\\ipopt.exe")
     # opt.set_options("halt_on_ampl_error=yes")
