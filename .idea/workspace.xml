@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.4 Inverse model updates">
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.5 Added comparison script">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model1.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,13 +219,29 @@
       <option name="project" value="LOCAL" />
       <updated>1678456766692</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="7.5 Bounded and unbounded investment">
+      <created>1679312022567</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679312022567</updated>
+    </task>
+    <task id="LOCAL-00007" summary="7.5 Added comparison script">
+      <created>1679312134366</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679312134366</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="7.3. Updates welf parameters" />
     <MESSAGE value="7.3. Updates model 1 mistakes" />
     <MESSAGE value="7.4 Inverse model updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="7.4 Inverse model updates" />
+    <MESSAGE value="7.5 Bounded and unbounded investment" />
+    <MESSAGE value="7.5 Added comparison script" />
+    <option name="LAST_COMMIT_MESSAGE" value="7.5 Added comparison script" />
   </component>
 </project>
