@@ -53,7 +53,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     model.pm_welf = pyo.Param(model.Tall, initialize=func.f_pm_welf)  # model.pm_ts or 1 or model.pm_4ts
     model.pm_delta_kap = pyo.Param(initialize=0.05)  # default = 0.05
     model.pm_cap_expo = pyo.Param(initialize=0.5)  # default = 0.5
-    model.pm_ies = pyo.Param(initialize=0.9)  # default = 1
+    model.pm_ies = pyo.Param(initialize=1)  # default = 1
     model.pm_pop = pyo.Param(initialize=1)  # default = 1
     model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
     model.sm_cesIO = pyo.Param(initialize=25)  # default = 25
@@ -67,8 +67,10 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
                              initialize=model.sm_cesIO)
     model.vm_cons = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=func.f_cons_bound,
                             initialize=model.sm_cesIO / 3)
-    model.vm_invMacro = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-3, None),
+    model.vm_invMacro = pyo.Var(model.Tall, domain= pyo.Reals, bounds=(None, None), # Achtung, hier wird invMacro nicht gebounded
                                 initialize= 0)
+    # model.vm_invMacro = pyo.Var(model.Tall, domain= pyo.Reals, bounds=(1e-3, None),
+    #                                 initialize= 0)
     model.vm_utility = pyo.Var(model.Tall, domain= pyo.NonNegativeReals, bounds=(1e-3, None), initialize= func.f_vm_utilitylog)
 
     model.vm_welfare_t = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-3, 500000), initialize= func.f_initialize_welf)
