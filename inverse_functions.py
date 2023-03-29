@@ -1,43 +1,27 @@
 '''
 Author: Mika Erdmann
 Project: Ramsey-Model and time steps
+This script contains the necessary functions for the inverse search.
+1. a slightly adapted verson of model 1, but has slightly different inputs and outputs
+2. constraint functions
+
 '''
 
 import pyomo.environ as pyo
 import model1_functions as func
 from pyomo.opt import SolverFactory
 from pyomo.opt import SolverStatus, TerminationCondition
+import numpy as np
+import model1
+import model1_functions
 import matplotlib.pyplot as plt
 
-# Different time definitions
-# 1: 5 year time steps
-# 2: 5 year time steps from 2020-2060, then 10 year time steps
-# 3: 1 year time steps
-# 4: 1 year time steps from 2020-2060, then 5 year time steps
-
-# Different welf weightings:
-# 0: no weighting
-# 1: weighting ~ timestep pm_ts
-# 2: weighting ~ average timesteps pm_4ts
-# 3: weighting ~ 0.9 * pm_ts
-
-# Different deprec. factors:
-# 1: old is zero and new is ricardas script
-# 2: uneven + even old and new
-# 3: regression 1
-# 4: regression 2
-
-# Regression
-# 1: Mikas Regression 1
-# 0: use cum. depreciation factors
-
-
+# 1. Adapted model 1 with different inputs
 def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr_old_inverse, reg =0):  # Do not change reg = 0 here!
     model = pyo.ConcreteModel()
     # Tall switch
-    model.time = timeswitch  # change this to the above representations
+    model.time = timeswitch
     tall_string = func.f_tall_string(model)
-    model.welf_weight = vm_weight
     model.invreg = reg
 
     tall_int = [int(i) for i in tall_string]
@@ -60,10 +44,13 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
     model.pm_pop = pyo.Param(initialize=1)  # default = 1
     model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
     model.sm_cesIO = pyo.Param(initialize=2)  # default = 25
-
+    # TODO: write with tall
     # deprec factors
-    model.pm_cumdepr_new = vm_cumdepr_new_inverse
-    model.pm_cumdepr_old = vm_cumdepr_old_inverse
+    model.pm_cumdepr_new = pyo.Param(initialize=vm_cumdepr_new_inverse)
+    model.pm_cumdepr_old = pyo.Param(initialize=vm_cumdepr_old_inverse)
+    # welf weight
+    model.welf_weight = pyo.Param(initialize=vm_weight)
+
 
     # Variables
     model.vm_cesIO = pyo.Var(model.Tall, within=pyo.NonNegativeReals, bounds=func.f_ces_bound,
@@ -144,4 +131,86 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
         print(str(results.solver))
     return model
 
+# 2. constraint functions
+def cons_constraint(m, t):
+    w = get_val(m.vm_weight)
+    cum_new = get_val(m.vm_cumdepr_new)
+    cum_old = get_val(m.vm_cumdepr_old)
+    runmodel = run_model1_inverse(timeswitch=m.time, vm_weight=w,
+                                                 vm_cumdepr_new_inverse=cum_new,
+                                                 vm_cumdepr_old_inverse=cum_old)
+    cons_dict = runmodel.vm_cons.get_values()
+    res_cons = cons_dict.values()
+    return list(res_cons)[t]
 
+def cap_constraint(m, t):
+    runmodel = run_model1_inverse(timeswitch=m.time, vm_weight=m.vm_weight,
+                                                 vm_cumdepr_new_inverse=m.vm_cumdepr_new,
+                                                 vm_cumdepr_old_inverse=m.vm_cumdepr_old)
+    cap_dict = runmodel.vm_cesIO.get_values()
+    res_cap = cap_dict.values()
+    return list(res_cap)[t]
+
+def inv_constraint(m, t):
+    runmodel = run_model1_inverse(timeswitch=m.time, vm_weight=m.vm_weight,
+                                                 vm_cumdepr_new_inverse=m.vm_cumdepr_new,
+                                                 vm_cumdepr_old_inverse=m.vm_cumdepr_old)
+    inv_dict = runmodel.vm_invMacro.get_values()
+    res_inv = inv_dict.values()
+    return list(res_inv)[t]
+
+# 3. Retrieving optimal values
+
+# Optimal model, get optimal variables
+def get_optimal(m):
+    opt_model = model1.run_model(timeswitch=3, weight=1, depr=2)
+    cons_opt_dict = opt_model.vm_cons.get_values()
+    cap_opt_dict = opt_model.vm_cesIO.get_values()
+    inv_opt_dict = opt_model.vm_invMacro.get_values()
+
+    result_cons = cons_opt_dict.values()
+    cons_opt = list(result_cons)
+    results_cap = cap_opt_dict.values()
+    cap_opt = list(results_cap)
+    results_inv = inv_opt_dict.values()
+    inv_opt = list(results_inv)
+    vm_opt = [cons_opt, cap_opt, inv_opt]
+    return vm_opt  # for every year
+
+def get_optimal_t(m):  # get only the needed values of vm_opt
+    vm_opt = np.asarray(get_optimal(m))
+    pm_dt = model1_functions.f_tall_diff(m)
+    x = [np.append(1,np.zeros((pm_dt[i]-1))) for i in range(1,len(pm_dt))]
+    index = np.asarray(x[0])
+    for i in range(1, len(x)):
+        index = np.append(index, x[i])
+    index = np.append(np.asarray(index, dtype= bool), True)
+    cons_opt = vm_opt[0][index]
+    cap_opt = vm_opt[1][index]
+    inv_opt = vm_opt[2][index]
+    vm_opt = [cons_opt, cap_opt, inv_opt]
+    return vm_opt
+
+def get_optimal_cons(m,t):
+    vm_opt = get_optimal_t(m)  # TODO write function for this
+    return vm_opt[0][t]
+
+def get_optimal_cap(m,t):
+    vm_opt = get_optimal_t(m)
+    return vm_opt[1][t]
+
+def get_optimal_inv(m,t):
+    vm_opt = get_optimal_t(m)
+    return vm_opt[2][t]
+
+def get_val(vm):
+    vm_dict = vm.get_values()
+    result_vm = vm_dict.values()
+    vm_opt = list(result_vm)
+    return vm_opt
+
+def get_par(pm):
+    pm_dict = pm.extract_values()
+    result_pm = pm_dict.values()
+    pm_opt = list(result_pm)
+    return pm_opt

@@ -46,7 +46,6 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     # Parameters
     model.pm_tall_val = pyo.Param(model.Tall, initialize=func.f_tall_val)
     model.pm_firstyear = pyo.Param(initialize=model.pm_tall_val[0])
-
     model.pm_dt = pyo.Param(model.Tall, initialize=func.f_dt)
     model.pm_ts = pyo.Param(model.Tall, initialize=func.f_pm_ts)
     model.pm_4ts = pyo.Param(model.Tall, initialize=func.f_pm_4ts)  # average over 4 ts

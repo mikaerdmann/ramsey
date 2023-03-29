@@ -1,3 +1,9 @@
+'''
+Author: Mika Erdmann
+Project: Ramsey-Model and time steps
+This script tests reliability of the model. It compares the outputs from the model 1 with the GAMS output
+'''
+
 import matplotlib.pyplot as plt
 import model1_functions as func
 
