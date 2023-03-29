@@ -29,7 +29,9 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
     # Model time parameters
     model.N = pyo.Param(initialize=len(tall_int))
     model.Tall = pyo.RangeSet(0, model.N - 1)
-
+    model.pm_cumdepr_new = vm_cumdepr_new_inverse
+    model.pm_cumdepr_old = vm_cumdepr_old_inverse
+    model.weight = vm_weight
     # Parameters
     model.pm_tall_val = pyo.Param(model.Tall, initialize=func.f_tall_val)
     model.pm_firstyear = pyo.Param(initialize=model.pm_tall_val[0])
@@ -37,7 +39,6 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
     model.pm_dt = pyo.Param(model.Tall, initialize=func.f_dt)
     model.pm_ts = pyo.Param(model.Tall, initialize=func.f_pm_ts)
     model.pm_4ts = pyo.Param(model.Tall, initialize=func.f_pm_4ts)  # average over 4 ts
-    model.pm_welf = pyo.Param(model.Tall, initialize=func.f_pm_welf)  # model.pm_ts or 1 or model.pm_4ts
     model.pm_delta_kap = pyo.Param(initialize=0.05)  # default = 0.05
     model.pm_cap_expo = pyo.Param(initialize=0.5)  # default = 0.5
     model.pm_ies = pyo.Param(initialize=0.9)  # default = 1
@@ -46,10 +47,10 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
     model.sm_cesIO = pyo.Param(initialize=2)  # default = 25
     # TODO: write with tall
     # deprec factors
-    model.pm_cumdepr_new = pyo.Param(initialize=vm_cumdepr_new_inverse)
-    model.pm_cumdepr_old = pyo.Param(initialize=vm_cumdepr_old_inverse)
+    model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=f_cumdepr_new)
+    model.pm_cumdepr_old = pyo.Param(model.Tall, initialize = f_cumdepr_old)
     # welf weight
-    model.welf_weight = pyo.Param(initialize=vm_weight)
+    model.pm_welf = pyo.Param(model.Tall, initialize= f_weight)
 
 
     # Variables
@@ -214,3 +215,12 @@ def get_par(pm):
     result_pm = pm_dict.values()
     pm_opt = list(result_pm)
     return pm_opt
+
+def f_cumdepr_new(m, t):
+    return m.pm_cumdepr_new[t]
+
+def f_cumdepr_old(m,t):
+    return m.pm_cumdepr_old[t]
+
+def f_weight(m, t):
+    return m.weight[t]
