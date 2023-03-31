@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.6 Ongoing inverse model building" />
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.6 Ongoing inverse model building">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Analysis_welf.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_welf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model1_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1_functions.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,14 +63,11 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.EA_inverse">
+  <component name="RunManager" selected="Python.Analysis_welf">
     <configuration name="Analysis_welf" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -106,6 +107,9 @@
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -171,10 +175,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Analysis_welf" />
         <item itemvalue="Python.EA_inverse" />
         <item itemvalue="Python.inverse_model" />
         <item itemvalue="Python.scratch" />
-        <item itemvalue="Python.Analysis_welf" />
         <item itemvalue="Python.main_run" />
       </list>
     </recent_temporary>
