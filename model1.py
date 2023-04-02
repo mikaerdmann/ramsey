@@ -123,7 +123,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     # The next lines solve the model
     opt = SolverFactory('ipopt', executable="C:\\Ipopt-3.14.11-win64-msvs2019-md\\bin\\ipopt.exe")
     # opt.set_options("halt_on_ampl_error=yes")
-    #opt.options['print_level'] = 6
+    #opt.options['print_level'] = 0
     # opt.options['output_file'] = "C:\\Users\\mikae\\PycharmProjects\\Ramseyvenv\\my_ipopt_log.txt"
     results = opt.solve(model, tee=True)
     # Solver result analisis

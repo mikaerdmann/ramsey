@@ -17,7 +17,7 @@ import model1_functions
 import matplotlib.pyplot as plt
 
 # 1. Adapted model 1 with different inputs
-def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr_old_inverse, reg =0):  # Do not change reg = 0 here!
+def run_model1_inverse(timeswitch, vm_weight,  reg =0):  # Do not change reg = 0 here!
     model = pyo.ConcreteModel()
     # Tall switch
     model.time = timeswitch
@@ -29,9 +29,10 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
     # Model time parameters
     model.N = pyo.Param(initialize=len(tall_int))
     model.Tall = pyo.RangeSet(0, model.N - 1)
-    model.pm_cumdepr_new = vm_cumdepr_new_inverse
-    model.pm_cumdepr_old = vm_cumdepr_old_inverse
-    model.weight = vm_weight
+    #model.pm_cumdepr_new = vm_cumdepr_new_inverse
+    #model.pm_cumdepr_old = vm_cumdepr_old_inverse
+    #model.weight = vm_weight
+    model.depr = 2
     # Parameters
     model.pm_tall_val = pyo.Param(model.Tall, initialize=func.f_tall_val)
     model.pm_firstyear = pyo.Param(initialize=model.pm_tall_val[0])
@@ -47,10 +48,15 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
     model.sm_cesIO = pyo.Param(initialize=2)  # default = 25
     # TODO: write with tall
     # deprec factors
-    model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=f_cumdepr_new)
-    model.pm_cumdepr_old = pyo.Param(model.Tall, initialize = f_cumdepr_old)
+    model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=model1_functions.f_cumdepr_new)
+    model.pm_cumdepr_old = pyo.Param(model.Tall, initialize = model1_functions.f_cumdepr_old)
     # welf weight
-    model.pm_welf = pyo.Param(model.Tall, initialize= f_weight)
+
+    def vm_weight_rule(m,t):
+        return vm_weight[t]
+
+
+    model.pm_welf = pyo.Param(model.Tall, initialize= vm_weight_rule)
 
 
     # Variables
@@ -118,7 +124,7 @@ def run_model1_inverse(timeswitch, vm_weight, vm_cumdepr_new_inverse, vm_cumdepr
     # The next lines solve the model
     opt = SolverFactory('ipopt', executable="C:\\Ipopt-3.14.11-win64-msvs2019-md\\bin\\ipopt.exe")
     # opt.set_options("halt_on_ampl_error=yes")
-    opt.options['print_level'] = 6
+    #opt.options['print_level'] = 6
     # opt.options['output_file'] = "C:\\Users\\mikae\\PycharmProjects\\Ramseyvenv\\my_ipopt_log.txt"
     results = opt.solve(model, tee=True)
     # Solver result analisis
