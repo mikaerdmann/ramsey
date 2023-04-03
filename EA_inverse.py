@@ -74,7 +74,7 @@ def ramsey_inverse(x):
     #x = np.reshape(x, (3, 18))
     #results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=x[0], vm_cumdepr_new_inverse=x[1], vm_cumdepr_old_inverse=x[2])
     pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
-    pm_welf[7:12] = x
+    pm_welf[8 - int(n / 2):8 + int(n / 2)] = x
     results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf)
     vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),inverse_functions.get_val(results.vm_invMacro)]
     # vm_opt_all = np.asarray(inverse_functions.get_optimal(m=1))
@@ -88,18 +88,19 @@ def ramsey_inverse(x):
     # cap_opt = vm_opt_all[1][index]
     # inv_opt = vm_opt_all[2][index]
     # vm_opt = [cons_opt, cap_opt, inv_opt]
-    residuals = np.sqrt(sum((vm_opt[0][7:12] - vm_run[0][7:12]) ** 2, 1) + sum((vm_opt[1][7:12] - vm_run[1][7:12]) ** 2, 1) + sum((vm_opt[2][7:12] - vm_run[2][7:12]) ** 2,1))
+    residuals = np.sqrt(sum((vm_opt[0][8 - int(n / 2):8 + int(n / 2)] - vm_run[0][8 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum((vm_opt[1][8 - int(n / 2):8 + int(n / 2)]- vm_run[1][8 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum((vm_opt[2][8 - int(n / 2):8 + int(n / 2)]- vm_run[2][8 - int(n / 2):8 + int(n / 2)]) ** 2,1))
     return residuals
 
 
 if __name__ == "__main__":
     for func in [ramsey_inverse]:  # add other functions
         vm_opt = get_vm_opt()
-        res = self_adapt(func,tau=1, sigma=0.3, gen= 50, lamb = 50)
+        n = 6
+        res = self_adapt(func,tau=1, sigma=0.3, gen= 100, lamb = 100, N = n)
         #x = np.reshape(res[0], (3, 18))
         x = res[0]
         pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
-        pm_welf[7:12] = x
+        pm_welf[8 - int(n / 2):8 + int(n / 2)] = x
 
         print(f"Top result of {func.__name__} has {res[2]} for residuals")
         #print(f"Values for best result: welf is {x[0]}, pm_cumdepr_new is {x[1]}, pm_cumdepr_old is {x[2]} ")

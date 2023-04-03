@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea" />
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea">
+      <change afterPath="$PROJECT_DIR$/EA_inversePyoo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inverse.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inverse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inverseGeneAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inverseGeneAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inverse_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/inverse_functions.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,20 +65,24 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.EA_inverse">
-    <configuration name="Analysis_welf" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings>
+        <option name="useSoftWraps" value="true" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.EA_inversePyoo">
+    <configuration name="EA_inverse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Analysis_welf.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EA_inverse.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -81,40 +91,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="EA_inverse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="EA_inverseGeneAI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EA_inverse.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EA_inverseGeneAI.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="inverse_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="EA_inversePyoo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inverse_model.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EA_inversePyoo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,6 +152,9 @@
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\mikae\PycharmProjects\Ramseyvenv\venv\Scripts\python.exe" />
       <option name="SDK_NAME" value="Python 3.9 (Ramseyvenv)" />
       <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
@@ -164,19 +171,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.EA_inversePyoo" />
+      <item itemvalue="Python.EA_inverseGeneAI" />
       <item itemvalue="Python.main_run" />
       <item itemvalue="Python.scratch_1" />
       <item itemvalue="Python.EA_inverse" />
-      <item itemvalue="Python.Analysis_welf" />
-      <item itemvalue="Python.inverse_model" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.EA_inversePyoo" />
+        <item itemvalue="Python.EA_inverseGeneAI" />
         <item itemvalue="Python.EA_inverse" />
         <item itemvalue="Python.main_run" />
         <item itemvalue="Python.scratch_1" />
-        <item itemvalue="Python.Analysis_welf" />
-        <item itemvalue="Python.inverse_model" />
       </list>
     </recent_temporary>
   </component>
@@ -289,19 +296,9 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/inverse_functions.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/inverse_functions.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/inverse_functions.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="28" />
+          <url>file://$PROJECT_DIR$/EA_inversePyoo.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

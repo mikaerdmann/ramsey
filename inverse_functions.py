@@ -29,9 +29,6 @@ def run_model1_inverse(timeswitch, vm_weight,  reg =0):  # Do not change reg = 0
     # Model time parameters
     model.N = pyo.Param(initialize=len(tall_int))
     model.Tall = pyo.RangeSet(0, model.N - 1)
-    #model.pm_cumdepr_new = vm_cumdepr_new_inverse
-    #model.pm_cumdepr_old = vm_cumdepr_old_inverse
-    #model.weight = vm_weight
     model.depr = 2
     # Parameters
     model.pm_tall_val = pyo.Param(model.Tall, initialize=func.f_tall_val)
@@ -46,7 +43,6 @@ def run_model1_inverse(timeswitch, vm_weight,  reg =0):  # Do not change reg = 0
     model.pm_pop = pyo.Param(initialize=1)  # default = 1
     model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
     model.sm_cesIO = pyo.Param(initialize=2)  # default = 25
-    # TODO: write with tall
     # deprec factors
     model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=model1_functions.f_cumdepr_new)
     model.pm_cumdepr_old = pyo.Param(model.Tall, initialize = model1_functions.f_cumdepr_old)
@@ -54,7 +50,6 @@ def run_model1_inverse(timeswitch, vm_weight,  reg =0):  # Do not change reg = 0
 
     def vm_weight_rule(m,t):
         return vm_weight[t]
-
 
     model.pm_welf = pyo.Param(model.Tall, initialize= vm_weight_rule)
 
@@ -84,8 +79,7 @@ def run_model1_inverse(timeswitch, vm_weight,  reg =0):  # Do not change reg = 0
 
     # Constraints
 
-    def welfare_t_rule(m,
-                       t):  # computes the welfare of every time step based on the seperate variable vm_utility, that is computed for every timestep
+    def welfare_t_rule(m,t):  # computes the welfare of every time step based on the seperate variable vm_utility, that is computed for every timestep
         return m.vm_welfare_t[t] == 1 / (1 + m.pm_prtp) ** (m.pm_tall_val[t] - 2005) * m.pm_pop * m.vm_utility[t] * \
             m.pm_welf[t]
 
