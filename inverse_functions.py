@@ -42,7 +42,7 @@ def run_model1_inverse(timeswitch, vm_weight,  reg =0):  # Do not change reg = 0
     model.pm_ies = pyo.Param(initialize=0.9)  # default = 1
     model.pm_pop = pyo.Param(initialize=1)  # default = 1
     model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
-    model.sm_cesIO = pyo.Param(initialize=2)  # default = 25
+    model.sm_cesIO = pyo.Param(initialize=25)  # default = 25
     # deprec factors
     model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=model1_functions.f_cumdepr_new)
     model.pm_cumdepr_old = pyo.Param(model.Tall, initialize = model1_functions.f_cumdepr_old)
@@ -59,7 +59,7 @@ def run_model1_inverse(timeswitch, vm_weight,  reg =0):  # Do not change reg = 0
                              initialize=model.sm_cesIO)
     model.vm_cons = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=func.f_cons_bound,
                             initialize=model.sm_cesIO / 3)
-    model.vm_invMacro = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-3, None),
+    model.vm_invMacro = pyo.Var(model.Tall, domain=pyo.Reals, bounds=(None, None),
                                 initialize=0)
     model.vm_utility = pyo.Var(model.Tall, domain=pyo.NonNegativeReals, bounds=(1e-3, None),
                                initialize=func.f_vm_utilitylog)

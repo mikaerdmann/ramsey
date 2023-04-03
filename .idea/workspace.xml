@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea">
-      <change afterPath="$PROJECT_DIR$/EA_inversePyoo.py" afterDir="false" />
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EA_inverse.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inverse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EA_inverseGeneAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inverseGeneAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inversePyoo.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inverse_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/inverse_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -273,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680441014207</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="7.7 inverse ea updates">
+      <created>1680519614629</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1680519614629</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -285,7 +291,8 @@
     <MESSAGE value="7.6 Ongoing inverse model building" />
     <MESSAGE value="7.7 Time rep updates" />
     <MESSAGE value="7.7 inverse ea" />
-    <option name="LAST_COMMIT_MESSAGE" value="7.7 inverse ea" />
+    <MESSAGE value="7.7 inverse ea updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="7.7 inverse ea updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -296,9 +303,9 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/EA_inversePyoo.py</url>
-          <line>34</line>
-          <option name="timeStamp" value="32" />
+          <url>file://$PROJECT_DIR$/EA_inverseGeneAI.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
