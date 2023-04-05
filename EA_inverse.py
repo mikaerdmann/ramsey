@@ -8,17 +8,21 @@ import matplotlib.pyplot as plt
 import inverse_functions
 import model1_functions
 
-def get_vm_opt():
+def get_vm_opt(timeswitch):
     vm_opt_all = np.asarray(inverse_functions.get_optimal(m=1))
-    pm_dt = [5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 10, 10, 10, 10, 10, 10, 10, 10]
-    y = [np.append(1, np.zeros((pm_dt[i] - 1))) for i in range(1, len(pm_dt))]
-    index = np.asarray(y[0])
-    for i in range(1, len(y)):
-        index = np.append(index, y[i])
-    index = np.append(np.asarray(index, dtype=bool), True)
-    cons_opt = vm_opt_all[0][index]
-    cap_opt = vm_opt_all[1][index]
-    inv_opt = vm_opt_all[2][index]
+    # pm_dt = [5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+    # y = [np.append(1, np.zeros((pm_dt[i] - 1))) for i in range(1, len(pm_dt))]
+    # index = np.asarray(y[0])
+    # for i in range(1, len(y)):
+    #     index = np.append(index, y[i])
+    # index = np.append(np.asarray(index, dtype=bool), True)
+    # cons_opt = vm_opt_all[0][index]
+    # cap_opt = vm_opt_all[1][index]
+    # inv_opt = vm_opt_all[2][index]
+    index = inverse_functions.get_indices(timeswitch)  # 3 or 1
+    cons_opt = np.asarray([vm_opt_all[0][i] for i in index])
+    cap_opt = np.asarray([vm_opt_all[1][i] for i in index])
+    inv_opt = np.asarray([vm_opt_all[2][i] for i in index])
     vm_opt = [cons_opt, cap_opt, inv_opt]
     return vm_opt
 
