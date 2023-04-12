@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea updates">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EA_inversePyoo.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo.py" afterDir="false" />
-    </list>
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea updates" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -308,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680708430020</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="7.7 inverse ea updates">
+      <created>1680776398713</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1680776398713</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
