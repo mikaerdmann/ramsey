@@ -3,6 +3,10 @@ Author: Mika Erdmann
 Project: Ramsey-Model and time steps
 This script is the main script that runs the model using different specifications
 '''
+from matplotlib import pyplot as plt
+
+import inverse_functions
+import model1_functions
 
 
 def run_experiment(time_rep, welf_weight, cum_inv_rep):
@@ -48,6 +52,22 @@ def f_decide(invrep):  # Combines the different modelversions needed for the dif
         modelversion = 2
     return cumdepr_factor, investment_regression, modelversion
 
-
-model = run_experiment(2,1,2)
-print(model.pm_welf.extract_values().values())
+if __name__ == '__main__':
+    welf = 1
+    inv = 2
+    time = 4
+    model = run_experiment(time,welf,inv)
+    print(model.pm_welf.extract_values().values())
+    vm_run = [inverse_functions.get_val(model.vm_cons), inverse_functions.get_val(model.vm_cesIO),
+              inverse_functions.get_val(model.vm_invMacro)]
+    tall_string = model1_functions.f_tall_string_b()
+    tall_int = [int(i) for i in tall_string]
+    fig3, axs = plt.subplots(3, 1)
+    axs[0].plot(tall_int, vm_run[0], 'b')
+    axs[0].legend("Consumption run")
+    axs[1].plot(tall_int, vm_run[1], 'k')
+    axs[1].legend("Kapital run")
+    axs[2].plot(tall_int, vm_run[2], "r")
+    axs[2].legend(("Investment run"), loc='upper right')
+    fig3.suptitle(f"Pyomo model with t {time}, welf {welf} and inv {inv}")
+    plt.show()
