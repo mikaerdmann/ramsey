@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 
 # 1. Adapted model 1 with different inputs
-def run_model1_inverse(timeswitch, vm_weight, reg=0):  # Do not change reg = 0 here!
+def run_model1_inverse(timeswitch, vm_weight,c_n, c_o, depr = 2, reg=0):  # Do not change reg = 0 here!
     model = pyo.ConcreteModel()
     # Tall switch
     model.time = timeswitch
@@ -30,7 +30,7 @@ def run_model1_inverse(timeswitch, vm_weight, reg=0):  # Do not change reg = 0 h
     # Model time parameters
     model.N = pyo.Param(initialize=len(tall_int))
     model.Tall = pyo.RangeSet(0, model.N - 1)
-    model.depr = 2
+    model.depr = depr
     # Parameters
     model.pm_tall_val = pyo.Param(model.Tall, initialize=func.f_tall_val)
     model.pm_firstyear = pyo.Param(initialize=model.pm_tall_val[0])
@@ -45,8 +45,12 @@ def run_model1_inverse(timeswitch, vm_weight, reg=0):  # Do not change reg = 0 h
     model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
     model.sm_cesIO = pyo.Param(initialize=25)  # default = 25
     # deprec factors
-    model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=model1_functions.f_cumdepr_new)
-    model.pm_cumdepr_old = pyo.Param(model.Tall, initialize=model1_functions.f_cumdepr_old)
+    if model.depr != 0:
+        model.pm_cumdepr_new = pyo.Param(model.Tall, initialize=model1_functions.f_cumdepr_new)
+        model.pm_cumdepr_old = pyo.Param(model.Tall, initialize=model1_functions.f_cumdepr_old)
+    if model.depr == 0:
+        model.pm_cumdepr_new = c_n
+        model.pm_cumdepr_old = c_o
 
     # welf weight
 

@@ -137,6 +137,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
         print(str(results.solver))
     return model
 
-model = run_model(timeswitch=2, weight=1, depr= 3)
+model = run_model(timeswitch=2, weight=1, depr= 2)
 print(pyo.summation(model.vm_welfare_t))
-model.pm_welf.pprint()
+print(model.pm_cumdepr_new.extract_values())
+print(model.pm_cumdepr_old.extract_values())
