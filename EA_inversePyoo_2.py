@@ -111,11 +111,12 @@ for i in range(ABs.shape[1]):
             x0 = np.asarray([pm_welf[8 - a:8 + b], pm_cumdepr_new_array , pm_cumdepr_old_array]).flatten()
             algorithm = CMAES(x0=x0, sigma=0.09, restarts=11, restart_from_best=True, bipop=True)
             # termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=20,n_max_gen=1000,n_max_evals=100000)
-            termination = get_termination("time", "00:25:00")
+            #termination = get_termination("time", "00:45:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
-            res = minimize(Problem, algorithm, termination, verbose=True)
+            #res = minimize(Problem, algorithm, termination, verbose=True)
+            res = minimize(Problem, algorithm, verbose=True)
             x =np.asarray(list(res.X))
             x = np.reshape(x, (3, N))
             pm_welf[8 - a:8 + b] = x[0]
