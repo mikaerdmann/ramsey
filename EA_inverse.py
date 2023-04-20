@@ -1,7 +1,8 @@
 '''
 Author: Mika Erdmann
 Project: Ramsey-Model and time steps
-Self Adaptation EA for inverse search
+
+Self written Self Adaptation EA for inverse search. (not used anymore, but still contains a function get_vm_opt() which is used in all inverse models.
 '''
 import numpy as np
 import matplotlib.pyplot as plt

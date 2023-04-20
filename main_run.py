@@ -1,7 +1,7 @@
 '''
 Author: Mika Erdmann
 Project: Ramsey-Model and time steps
-This script is the main script that runs the model using different specifications
+This script is the main script that runs the model using different specifications (decides between model_1.py and model_2.py)
 '''
 from matplotlib import pyplot as plt
 

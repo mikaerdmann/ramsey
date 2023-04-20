@@ -1,7 +1,8 @@
 '''
 Author: Mika Erdmann
 Project: Ramsey-Model and time steps
-This script implements the model using additionally the cumulative investment as a variable
+This script implements the model using additionally the cumulative investment as a variable. 
+- not used anymore - 
 '''
 
 import pyomo.environ as pyo

@@ -1,3 +1,10 @@
+'''
+Author: Mika Erdmann
+- not used anymore - 
+This script contains the inverse search (using GeneAI library) that implements the optimization of the parameter pm_welf (p_t)by minimizing the difference to the EA_inverse.get_vm_opt() result.
+
+'''
+
 from geneal.genetic_algorithms import ContinuousGenAlgSolver
 import matplotlib.pyplot as plt
 import EA_inverse

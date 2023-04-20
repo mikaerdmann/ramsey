@@ -1,6 +1,7 @@
 '''
 Author: Mika Erdmann
 Project: Ramsey-Model and time steps
+- not used anymore - (does not work)
 This script implements a pyomo model for inverse search.
 '''
 

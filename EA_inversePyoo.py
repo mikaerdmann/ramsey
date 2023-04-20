@@ -1,3 +1,9 @@
+'''
+Author: Mika Erdmann
+This script contains the inverse Pyoo Model that implements the optimization of the only parameter pm_welf (p_t) by minimizing the difference to the EA_inverse.get_vm_opt() result.
+
+'''
+
 from geneal.genetic_algorithms import ContinuousGenAlgSolver
 import matplotlib.pyplot as plt
 from pymoo.termination import get_termination

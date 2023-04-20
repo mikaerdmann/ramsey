@@ -139,7 +139,7 @@ def run_model1_inverse(timeswitch, vm_weight,c_n, c_o, depr = 2, reg=0):  # Do n
     return model
 
 
-# 2. constraint functions
+# 2. constraint functions (only used in inverse_model.py, which is not used anymore)
 def cons_constraint(m, t):
     w = get_val(m.vm_weight)
     cum_new = get_val(m.vm_cumdepr_new)

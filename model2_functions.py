@@ -2,7 +2,7 @@
 Author: Mika Erdmann
 Project: Ramsey model and time steps
 
-This script includes the functions that the model script calls.
+This script includes the functions that the model 2 script calls.
 '''
 
 import numpy as np
