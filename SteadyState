@@ -1,0 +1,51 @@
+
+# Parameters
+theta = 2.0
+beta = 0.97
+rho = - np.log(beta)
+A0 = 1.0
+g = 0
+L0 = 100
+n = 0 
+H = 1.0
+delta = 0.03 
+alpha = 0.5
+dt = 5
+
+# Define the steady-state values of the state variables k and c (after @pyeconomics) (@https://github.com/davidrpugh/pyeconomics/commits?author=davidrpugh)
+
+def k_star(): 
+    """
+    
+    The steady-state level of capital stock per effective worker, k_star, 
+    in the Ramsey model is a function of the exogenous parameters!
+    
+    N.B.: The function takes no arguments because parameters are defined above!
+    """
+    return ((alpha * np.exp(-rho)) / (np.exp(theta * g) - np.exp(-(rho + (1-(1-delta)**dt)))))**(1 / (1 - alpha))
+    
+def c_star(): 
+    """
+    
+    The steady-state level of consumption per effective worker, c_star, 
+    in the Ramsey model is a direct function of the exogenous parameters 
+    and the steady-state level of capital stock per effective worker 
+    (which is itself a function of only exogenous parameters).
+    
+    N.B.: The function takes no arguments because parameters are defined above!
+    """
+    return f(k_star()) + (np.exp(-(1-(1-delta)**dt)) - np.exp(n + g)) * k_star()
+    
+    
+ 
+# Display k_star and c_star for our chosen parameter values
+k_star(), c_star()
+
+# Define the steady state values after paper by Sijmen
+beta_n = beta**n
+delta_n = 1-(1-delta)**n
+
+def inv_rate_star():
+  return alpha * ((beta_n * delta_n) /(1-beta_n*(1-delta_n))
+
+inv_rate_star()
