@@ -75,7 +75,7 @@
       <recent name="C:\Users\mikae\PycharmProjects\Ramseyvenv\venv\Lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.scratch_3">
+  <component name="RunManager" selected="Python.EA_inversePyoo_2">
     <configuration name="EA_inversePyoo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,6 +161,9 @@
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\mikae\PycharmProjects\Ramseyvenv\venv\Scripts\python.exe" />
       <option name="SDK_NAME" value="Python 3.9 (Ramseyvenv)" />
       <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
@@ -185,8 +188,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.scratch_3" />
         <item itemvalue="Python.EA_inversePyoo_2" />
+        <item itemvalue="Python.scratch_3" />
         <item itemvalue="Python.model1" />
         <item itemvalue="Python.EA_inversePyoo" />
         <item itemvalue="Python.main_run" />
@@ -356,12 +359,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/inverse_model.py</url>
-          <line>64</line>
+          <line>65</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/EA_inverseGeneAI.py</url>
-          <line>17</line>
+          <line>24</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -381,8 +384,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/EA_inversePyoo.py</url>
-          <line>84</line>
+          <line>90</line>
           <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/EA_inversePyoo_2.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/EA_inversePyoo_2.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/EA_inversePyoo_2.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

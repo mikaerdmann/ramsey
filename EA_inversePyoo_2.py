@@ -24,7 +24,7 @@ class Ramsey(ElementwiseProblem):
     def __init__(self):
         xl = np.zeros(n)
         xu = np.ones(n) * 11
-        super().__init__(n_var=n, n_obj=1, n_ieq_constr=0, xl=xl, xu=xu)
+        super().__init__(n_var=n-1, n_obj=1, n_ieq_constr=0, xl=xl, xu=xu)
 
     def _evaluate(self, x, out, *args, **kwargs):
         out["F"] = ramsey_inverse(x)
@@ -36,7 +36,7 @@ def ramsey_inverse(x):
     # results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=x[0], vm_cumdepr_new_inverse=x[1], vm_cumdepr_old_inverse=x[2])
     pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
     # pm_welf[9 - int(n / 2):8 + int(n / 2)] = x
-    pm_welf[8 - a:8 + b] = X[0][8 - a:8 + b]
+    pm_welf[8 - a:7 + b] = X[0][8 - a:7 + b]
     cumdepr_new = X[1]
     cumdepr_old  = X[2]
     results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf,c_n = cumdepr_new, c_o = cumdepr_old)
@@ -116,16 +116,16 @@ for i in range(ABs.shape[1]):
             Problem = Ramsey()
             x0 = np.asarray([pm_welf[8 - a:8 + b], pm_cumdepr_new_array , pm_cumdepr_old_array]).flatten()
             algorithm = CMAES(x0=x0, sigma=0.09, restarts=11, restart_from_best=True, bipop=True)
-            # termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=20,n_max_gen=1000,n_max_evals=100000)
+            termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=1000,n_max_evals=10000)
             #termination = get_termination("time", "00:45:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
-            #res = minimize(Problem, algorithm, termination, verbose=True)
-            res = minimize(Problem, algorithm, verbose=True)
+            res = minimize(Problem, algorithm, termination, verbose=True)
+            # res = minimize(Problem, algorithm, verbose=True)
             x =np.asarray(list(res.X))
             x = np.reshape(x, (3, N))
-            pm_welf[8 - a:8 + b] = x[0]
+            pm_welf[8 - a:7 + b] = x[0][8 - a:7 + b]
             results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, c_o=0, c_n=0)
             vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
                       inverse_functions.get_val(results.vm_invMacro)]
@@ -139,13 +139,13 @@ for i in range(ABs.shape[1]):
             #     sum((vm_opt[0][9 - int(n / 2):8 + int(n / 2)] - vm_run[0][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
             #         (vm_opt[1][9 - int(n / 2):8 + int(n / 2)] - vm_run[1][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
             #         (vm_opt[2][9 - int(n / 2):8 + int(n / 2)] - vm_run[2][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1))
-            print(f" The residuals over the {n} time steps around 2060 are: {residuals1}")
+            #print(f" The residuals over the {n} time steps around 2060 are: {residuals1}")
             residuals2 = np.sqrt(sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
                 (vm_opt[2] - vm_run[2]) ** 2, 1))
             residuals3 = np.sqrt((vm_opt[0] - vm_run[0]) ** 2 + (vm_opt[1] - vm_run[1]) ** 2 + (vm_opt[2] - vm_run[2]) ** 2)
 
             print(f"The residuals over the whole time are {residuals2}")
-            #print(f"The residuals per time step are {residuals3}")
+            print(f"The residuals per time step are {residuals3}")
             Residuals_all[i] = residuals2
             Residuals_t[i] = residuals3
             # Axis creation
