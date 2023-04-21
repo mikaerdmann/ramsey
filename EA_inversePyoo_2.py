@@ -24,7 +24,7 @@ class Ramsey(ElementwiseProblem):
     def __init__(self):
         xl = np.zeros(n)
         xu = np.ones(n) * 11
-        super().__init__(n_var=n-1, n_obj=1, n_ieq_constr=0, xl=xl, xu=xu)
+        super().__init__(n_var=n, n_obj=1, n_ieq_constr=0, xl=xl, xu=xu)
 
     def _evaluate(self, x, out, *args, **kwargs):
         out["F"] = ramsey_inverse(x)
@@ -32,13 +32,13 @@ class Ramsey(ElementwiseProblem):
 
 
 def ramsey_inverse(x):
-    X = np.reshape(x, (3, N))
     # results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=x[0], vm_cumdepr_new_inverse=x[1], vm_cumdepr_old_inverse=x[2])
     pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
     # pm_welf[9 - int(n / 2):8 + int(n / 2)] = x
-    pm_welf[8 - a:7 + b] = X[0][8 - a:7 + b]
-    cumdepr_new = X[1]
-    cumdepr_old  = X[2]
+    # pm_welf[8 - a:7 + b] = X[0][8 - a:7 + b]
+    cumdepr_new = x[N-1:2*N-1]
+    cumdepr_old  = x[2*N-1:]
+    pm_welf[0:N-1] = x[0:N-1]
     results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf,c_n = cumdepr_new, c_o = cumdepr_old)
     vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
               inverse_functions.get_val(results.vm_invMacro)]
@@ -54,8 +54,10 @@ def ramsey_inverse(x):
 
 pm_cumdepr_new = {0: 2.8525000000000023, 1: 2.8525000000000023, 2: 2.8525000000000023, 3: 2.8525000000000023, 4: 2.8525000000000023, 5: 2.8525000000000023, 6: 2.8525000000000023, 7: 2.8525000000000023, 8: 2.8525000000000023, 9: 4.137490781250005, 10: 4.137490781250005, 11: 4.137490781250005, 12: 4.137490781250005, 13: 4.137490781250005, 14: 4.137490781250005, 15: 4.137490781250005, 16: 4.137490781250005, 17: 4.137490781250005}
 pm_cumdepr_old = {0: 1.6718812500000024, 1: 1.6718812500000024, 2: 1.6718812500000024, 3: 1.6718812500000024, 4: 1.6718812500000024, 5: 1.6718812500000024, 6: 1.6718812500000024, 7: 1.6718812500000024, 8: 1.6718812500000024, 9: 3.113989496482422, 10: 3.113989496482422, 11: 3.113989496482422, 12: 3.113989496482422, 13: 3.113989496482422, 14: 3.113989496482422, 15: 3.113989496482422, 16: 3.113989496482422, 17: 3.113989496482422}
-pm_cumdepr_new_array = np.asarray(list(pm_cumdepr_new.values()))
-pm_cumdepr_old_array = np.asarray(list(pm_cumdepr_old.values()))
+pm_cumdepr_new_list = list(pm_cumdepr_new.values())
+pm_cumdepr_new_array = np.asarray(pm_cumdepr_new_list)
+pm_cumdepr_old_list = list(pm_cumdepr_old.values())
+pm_cumdepr_old_array = np.asarray(pm_cumdepr_old_list)
 pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
 Ti = [0,1]
 As = [8]
@@ -67,7 +69,7 @@ for i in range(ABs.shape[1]):
     a = ABs[0][i]
     b = ABs[1][i]
     N = np.arange(8 - a, 8 + b).size
-    n = 18*2+N
+    n = 18*2+N -1
     for t in Ti:
         if __name__ == "__main__" and t == 1:
             vm_opt = EA_inverse.get_vm_opt(1)
@@ -114,19 +116,22 @@ for i in range(ABs.shape[1]):
             vm_opt = EA_inverse.get_vm_opt(1)
             np.random.seed(1)
             Problem = Ramsey()
-            x0 = np.asarray([pm_welf[8 - a:8 + b], pm_cumdepr_new_array , pm_cumdepr_old_array]).flatten()
+            x0 = np.append(np.append(np.asarray(pm_welf)[0:17], pm_cumdepr_new_array),  pm_cumdepr_old_array)
             algorithm = CMAES(x0=x0, sigma=0.09, restarts=11, restart_from_best=True, bipop=True)
-            termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=1000,n_max_evals=10000)
-            #termination = get_termination("time", "00:45:00")
+            #termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=1000,n_max_evals=10000)
+            termination = get_termination("time", "00:05:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
             res = minimize(Problem, algorithm, termination, verbose=True)
             # res = minimize(Problem, algorithm, verbose=True)
             x =np.asarray(list(res.X))
-            x = np.reshape(x, (3, N))
-            pm_welf[8 - a:7 + b] = x[0][8 - a:7 + b]
-            results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, c_o=0, c_n=0)
+            cumdepr_new = x[N - 1:2 * N - 1]
+            cumdepr_old = x[2 * N - 1:-1]
+            pm_welf = np.append(x[0:N - 1], [10])
+            #x = np.reshape(x, (3, N))
+            #pm_welf[8 - a:7 + b] = x[0][8 - a:7 + b]
+            results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, c_o=cumdepr_old, c_n=cumdepr_new)
             vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
                       inverse_functions.get_val(results.vm_invMacro)]
             tall_string = model1_functions.f_tall_string_b()
