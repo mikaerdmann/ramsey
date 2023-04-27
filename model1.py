@@ -4,6 +4,8 @@ Project: Ramsey-Model and time steps
 '''
 
 import pyomo.environ as pyo
+from matplotlib import rcParams
+
 import model1_functions as func
 from pyomo.opt import SolverFactory
 from pyomo.opt import SolverStatus, TerminationCondition
@@ -138,36 +140,41 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     return model
 
 if __name__ == "__main__":
-    model = run_model(timeswitch=2, weight=1, depr= 2)
-    print(pyo.summation(model.vm_welfare_t))
-    print(model.pm_cumdepr_new.extract_values())
-    print(model.pm_cumdepr_old.extract_values())
-    cons_opt_dict = model.vm_cons.get_values()
-    cap_opt_dict = model.vm_cesIO.get_values()
-    inv_opt_dict = model.vm_invMacro.get_values()
+    Ti = [1,2,3,4,5,6]
+    for t in Ti:
+        model = run_model(timeswitch=t, weight=1, depr= 2)
+        print(pyo.summation(model.vm_welfare_t))
+        print(model.pm_cumdepr_new.extract_values())
+        print(model.pm_cumdepr_old.extract_values())
+        cons_opt_dict = model.vm_cons.get_values()
+        cap_opt_dict = model.vm_cesIO.get_values()
+        inv_opt_dict = model.vm_invMacro.get_values()
 
-    # Convert object to a list
-    result_cons = cons_opt_dict.values()
-    cons_opt = list(result_cons)
-    results_cap = cap_opt_dict.values()
-    cap_opt = list(results_cap)
-    results_inv = inv_opt_dict.values()
-    inv_opt = list(results_inv)
-    pm_tall_val = model.pm_tall_val.extract_values()
-    tall_int = list(pm_tall_val.values())
-    print(cons_opt)
-    # Axis creation
-    plt.subplot(1, 3, 1)
-    plt.plot(tall_int, cons_opt, 'b')
-    plt.ylabel("Consumption")
-    plt.xlabel("Time")
-    plt.subplot(1, 3, 2)
-    plt.title(f"Optimal paths. Welfare: {pyo.value(model.v_welfare)}", loc="center")
-    plt.plot(tall_int, cap_opt, 'k')
-    plt.ylabel("Kapital")
-    plt.xlabel("Time")
-    plt.subplot(1, 3, 3)
-    plt.plot(tall_int, inv_opt, "r")
-    plt.ylabel("Investment")
-    plt.xlabel("Time")
-    plt.show()
+        # Convert object to a list
+        result_cons = cons_opt_dict.values()
+        cons_opt = list(result_cons)
+        results_cap = cap_opt_dict.values()
+        cap_opt = list(results_cap)
+        results_inv = inv_opt_dict.values()
+        inv_opt = list(results_inv)
+        pm_tall_val = model.pm_tall_val.extract_values()
+        tall_int = list(pm_tall_val.values())
+        print(cons_opt)
+        # Axis creation
+        rcParams['figure.figsize'] = 8, 3
+        plt.clf()
+        plt.subplot(1, 3, 1)
+        plt.plot(tall_int, cons_opt, 'b')
+        plt.ylabel("Consumption")
+        plt.xlabel("Time")
+        plt.subplot(1, 3, 2)
+        plt.title(f"Optimal paths. Welfare: {pyo.value(model.v_welfare)}", loc="center")
+        plt.plot(tall_int, cap_opt, 'k')
+        plt.ylabel("Kapital")
+        plt.xlabel("Time")
+        plt.subplot(1, 3, 3)
+        plt.plot(tall_int, inv_opt, "r")
+        plt.ylabel("Investment")
+        plt.xlabel("Time")
+        plt.tight_layout()
+        plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Results_model1_t{t}.")

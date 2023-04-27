@@ -12,7 +12,7 @@ import pyomo.environ as pyo
 
 # Set Parameters
 t: int = 5
-weights: list = [0,1,2,3]
+weights: list = [1,3]
 investment: int = 2
 
 # Visualisation of model runs in a loop
@@ -37,16 +37,19 @@ for i in range(0, len(weights)):
     tall_int = list(pm_tall_val.values())
     print(cons_opt)
     # Axis creation
-    plt.subplot(4, 3, counter)
+    plt.subplot(2, 3, counter)
     plt.plot(tall_int, cons_opt, 'b')
-    plt.legend("Consumption")
-    plt.subplot(4,3,counter+1)
+    plt.ylabel("Consumption")
+    plt.xlabel("Time")
+    plt.subplot(2,3,counter+1)
     plt.title(f"Time: {t}. Welf_weight: {weights[i]}. Welfare: {pyo.value(model.v_welfare)}", loc= "center")
     plt.plot(tall_int, cap_opt, 'k')
-    plt.legend("Kapital")
-    plt.subplot(4,3,counter+2)
+    plt.ylabel("Kapital")
+    plt.xlabel("Time")
+    plt.subplot(2,3,counter+2)
     plt.plot(tall_int, inv_opt, "r")
-    plt.legend(("Investment"), loc='upper right')
+    plt.ylabel("Investment")
+    plt.xlabel("Time")
     counter = counter +3
 plt.show()
 

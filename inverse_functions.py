@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 
 # 1. Adapted model 1 with different inputs
-def run_model1_inverse(timeswitch, vm_weight,c_n, c_o, depr = 2, reg=0):  # Do not change reg = 0 here!
+def run_model1_inverse(timeswitch, vm_weight,c_n = 0, c_o = 0, depr = 2, reg=0):  # Do not change reg = 0 here!
     model = pyo.ConcreteModel()
     # Tall switch
     model.time = timeswitch
