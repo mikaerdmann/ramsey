@@ -37,15 +37,21 @@ def ramsey_inverse(x):
     pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
     # pm_welf[9 - int(n / 2):8 + int(n / 2)] = x
     # pm_welf[8 - a:7 + b] = X[0][8 - a:7 + b]
-    cumdepr_new = x[N-1:2*N-1]
-    cumdepr_old  = x[2*N-1:]
-    pm_welf[0:N-1] = x[0:N-1]
-    results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf,depr= 0,c_n = cumdepr_new, c_o = cumdepr_old)
+    cumdepr_new = x[0:2]
+    cumdepr_new2 = pm_cumdepr_new_array
+    cumdepr_new2[0:8] = cumdepr_new[0]
+    cumdepr_new2[8:] = cumdepr_new[1]
+    cumdepr_old = x[2:4]
+    cumdepr_old2 = pm_cumdepr_old_array
+    cumdepr_old2[0:8] = cumdepr_old[0]
+    cumdepr_old2[8:] = cumdepr_old[1]
+    # pm_welf[0:8] = np.ones(8)*x[0]
+    # pm_welf[8] = x[1]
+    # pm_welf[9:18] = np.ones(9)*x[2]
+    results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf,depr= 0,c_n = cumdepr_new2, c_o = cumdepr_old2)
     vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
               inverse_functions.get_val(results.vm_invMacro)]
-    # residuals1 = np.sqrt(
-    #     sum((vm_opt[0][9 - int(n / 2):8 + int(n / 2)] - vm_run[0][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
-    #         (vm_opt[1][9- int(n / 2):8 + int(n / 2)] - vm_run[1][9- int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
+
     #         (vm_opt[2][9 - int(n / 2):8 + int(n / 2)] - vm_run[2][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1))
     residuals2 = np.sqrt(
         sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
@@ -68,7 +74,7 @@ for i in range(ABs.shape[1]):
     a = ABs[0][i]
     b = ABs[1][i]
     N = np.arange(8 - a, 8 + b).size
-    n = 18*2+N -1
+    n = 4
     for t in Ti:
         if __name__ == "__main__" and t == 1:
             vm_opt = EA_inverse.get_vm_opt(1)
@@ -115,37 +121,37 @@ for i in range(ABs.shape[1]):
             vm_opt = EA_inverse.get_vm_opt(1)
             np.random.seed(1)
             Problem = Ramsey()
-            x0 = np.append(np.append(np.asarray(pm_welf)[0:17], pm_cumdepr_new_array),  pm_cumdepr_old_array)
+            x0 = np.append( [pm_cumdepr_new_array[1], pm_cumdepr_new_array[16]],  [pm_cumdepr_old_array[1], pm_cumdepr_old_array[16]])
             algorithm = CMAES(x0=x0, sigma=0.09, restarts=11, restart_from_best=True, bipop=True)
             #algorithm = ES(n_offsprings=200, rule=1.0 / 7.0)
 
             #termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=100,n_max_evals=1000)
-            termination = get_termination("time", "01:00:00")
+            termination = get_termination("time", "00:25:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
             res = minimize(Problem, algorithm, termination, verbose=True)
             # res = minimize(Problem, algorithm, verbose=True)
             x =np.asarray(list(res.X))
-            cumdepr_new = x[N - 1:2 * N - 1]
-            cumdepr_old = x[2 * N - 1:]
-            pm_welf = np.append(x[0:N - 1], [10])
+            cumdepr_new = x[0:2]
+            cumdepr_new2 = pm_cumdepr_new_array
+            cumdepr_new2[0:8] = cumdepr_new[0]
+            cumdepr_new2[8:] = cumdepr_new[1]
+            cumdepr_old = x[2:4]
+            cumdepr_old2 = pm_cumdepr_old_array
+            cumdepr_old2[0:8] = cumdepr_old[0]
+            cumdepr_old2[8:] = cumdepr_old[1]
+            # pm_welf[0:8] = np.ones(8) * x[0]
+            # pm_welf[8] = x[1]
+            # pm_welf[9:18] = np.ones(9) * x[2]
             #x = np.reshape(x, (3, N))
             #pm_welf[8 - a:7 + b] = x[0][8 - a:7 + b]
-            results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, depr=0, c_o=cumdepr_old, c_n=cumdepr_new)
+            results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, depr=0, c_o=cumdepr_old2, c_n=cumdepr_new2)
             vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
                       inverse_functions.get_val(results.vm_invMacro)]
             tall_string = model1_functions.f_tall_string_b()
             tall_int = [int(i) for i in tall_string]
-            #residuals1 = np.sqrt(
-            #    sum((vm_opt[0][8 - a:8 + b] - vm_run[0][8 - a:8 + b]) ** 2, 1) + sum(
-            #        (vm_opt[1][8 - a:8 + b] - vm_run[1][8 - a:8 + b]) ** 2, 1) + sum(
-            #        (vm_opt[2][8 - a:8 + b] - vm_run[2][8 - a:8 + b]) ** 2, 1))
-            # residuals1 = np.sqrt(
-            #     sum((vm_opt[0][9 - int(n / 2):8 + int(n / 2)] - vm_run[0][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
-            #         (vm_opt[1][9 - int(n / 2):8 + int(n / 2)] - vm_run[1][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
-            #         (vm_opt[2][9 - int(n / 2):8 + int(n / 2)] - vm_run[2][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1))
-            #print(f" The residuals over the {n} time steps around 2060 are: {residuals1}")
+
             residuals_all = np.sqrt(sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
                 (vm_opt[2] - vm_run[2]) ** 2, 1))
             residuals_t = np.sqrt((vm_opt[0] - vm_run[0]) ** 2 + (vm_opt[1] - vm_run[1]) ** 2 + (vm_opt[2] - vm_run[2]) ** 2)
@@ -181,7 +187,7 @@ for i in range(ABs.shape[1]):
             axs[2, 0].set_ylabel("Investment")
             axs[2, 0].set_xlabel("Time")
             axs[2, 1].plot(tall_int, vm_run[2], "r")
-            axs[2, 1].set_ylabel("Investment run")
+            axs[2, 1].set_ylabel("Investment")
             axs[2, 1].set_xlabel("Time")
 
             #fig3.suptitle(f"Pyomo model using optimized pm_welf with n = {N} and optimizing over all residuals.")
