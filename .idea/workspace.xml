@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea 2 updates and figures">
-      <change afterPath="$PROJECT_DIR$/EA_inversePyoo_3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EA_inversePyoo_4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EA_inversePyoo_5.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EA_inversePyoo.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EA_inversePyoo_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inversePyoo_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo_4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inverse_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/inverse_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +76,7 @@
       <recent name="C:\Users\mikae\PycharmProjects\Ramseyvenv\venv\Lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.EA_inversePyoo_5">
+  <component name="RunManager" selected="Python.EA_inversePyoo_4">
     <configuration name="EA_inversePyoo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -180,8 +176,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.EA_inversePyoo_5" />
         <item itemvalue="Python.EA_inversePyoo_4" />
+        <item itemvalue="Python.EA_inversePyoo_5" />
         <item itemvalue="Python.EA_inversePyoo_3" />
         <item itemvalue="Python.EA_inversePyoo" />
         <item itemvalue="Python.EA_inversePyoo_2" />
@@ -351,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682609879308</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="7.7 inverse ea 2 updates and figures">
+      <created>1682932632685</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1682932632685</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

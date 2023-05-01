@@ -48,7 +48,7 @@ def ramsey_inverse(x):
     pm_welf[0:8] = np.ones(8)*x[0]
     pm_welf[8] = x[1]
     pm_welf[9:18] = np.ones(9)*x[2]
-    results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf,depr= 0,c_n = cumdepr_new2, c_o = cumdepr_old2)
+    results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf,depr= 0,c_n = cumdepr_new2, c_o = cumdepr_old2, delta_kap=d_kap)
     vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
               inverse_functions.get_val(results.vm_invMacro)]
 
@@ -65,6 +65,7 @@ pm_cumdepr_new_list = list(pm_cumdepr_new.values())
 pm_cumdepr_new_array = np.asarray(pm_cumdepr_new_list)
 pm_cumdepr_old_list = list(pm_cumdepr_old.values())
 pm_cumdepr_old_array = np.asarray(pm_cumdepr_old_list)
+d_kap = 0.08
 pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
 Ti = [0]
 As = [8]
@@ -81,7 +82,7 @@ for i in range(ABs.shape[1]):
             results = inverse_functions.run_model1_inverse(timeswitch=2,
                                                            vm_weight=[5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0,
                                                                       10.0,
-                                                                      10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0], c_n= 0, c_o=0)
+                                                                      10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0], c_n= 0, c_o=0, delta_kap=d_kap)
             vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
                       inverse_functions.get_val(results.vm_invMacro)]
             tall_string = model1_functions.f_tall_string_b()
@@ -126,7 +127,7 @@ for i in range(ABs.shape[1]):
             #algorithm = ES(n_offsprings=200, rule=1.0 / 7.0)
 
             #termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=100,n_max_evals=1000)
-            termination = get_termination("time", "10:00:00")
+            termination = get_termination("time", "00:10:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
@@ -146,7 +147,7 @@ for i in range(ABs.shape[1]):
             pm_welf[9:18] = np.ones(9) * x[2]
             #x = np.reshape(x, (3, N))
             #pm_welf[8 - a:7 + b] = x[0][8 - a:7 + b]
-            results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, depr=0, c_o=cumdepr_old2, c_n=cumdepr_new2)
+            results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, depr=0, c_o=cumdepr_old2, c_n=cumdepr_new2, delta_kap=d_kap)
             vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
                       inverse_functions.get_val(results.vm_invMacro)]
             tall_string = model1_functions.f_tall_string_b()

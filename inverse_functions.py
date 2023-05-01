@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 
 # 1. Adapted model 1 with different inputs
-def run_model1_inverse(timeswitch, vm_weight,c_n = 0, c_o = 0, depr = 2, reg=0):  # Do not change reg = 0 here!
+def run_model1_inverse(timeswitch, vm_weight,c_n = 0, c_o = 0, depr = 2, reg=0, delta_kap = 0.05, discount_factor = 0.03):  # Do not change reg = 0 here!
     model = pyo.ConcreteModel()
     # Tall switch
     model.time = timeswitch
@@ -38,11 +38,11 @@ def run_model1_inverse(timeswitch, vm_weight,c_n = 0, c_o = 0, depr = 2, reg=0):
     model.pm_dt = pyo.Param(model.Tall, initialize=func.f_dt)
     model.pm_ts = pyo.Param(model.Tall, initialize=func.f_pm_ts)
     model.pm_4ts = pyo.Param(model.Tall, initialize=func.f_pm_4ts)  # average over 4 ts
-    model.pm_delta_kap = pyo.Param(initialize=0.05)  # default = 0.05
+    model.pm_delta_kap = pyo.Param(initialize=delta_kap)  # default = 0.05
     model.pm_cap_expo = pyo.Param(initialize=0.5)  # default = 0.5
     model.pm_ies = pyo.Param(initialize=0.9)  # default = 1
     model.pm_pop = pyo.Param(initialize=1)  # default = 1
-    model.pm_prtp = pyo.Param(initialize=0.03)  # default = 0.03
+    model.pm_prtp = pyo.Param(initialize=discount_factor)  # default = 0.03
     model.sm_cesIO = pyo.Param(initialize=25)  # default = 25
     # deprec factors
     if model.depr != 0:
