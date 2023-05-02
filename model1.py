@@ -140,7 +140,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     return model
 
 if __name__ == "__main__":
-    Ti = [1,2,3,4,5,6]
+    Ti = [1,2,3,4,5,6,7,8]
     for t in Ti:
         model = run_model(timeswitch=t, weight=1, depr= 2)
         print(pyo.summation(model.vm_welfare_t))
@@ -176,5 +176,19 @@ if __name__ == "__main__":
         plt.plot(tall_int, inv_opt, "r")
         plt.ylabel("Investment")
         plt.xlabel("Time")
-        plt.tight_layout()
-        plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Results_model1_t{t}.")
+        #plt.tight_layout()
+        #plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Results_model1_t{t}.")
+
+        eta = np.asarray(list(model.pm_welf.extract_values().values())) / ((1 + 0.03) ** (np.asarray(tall_int) - 2005))
+        theta = eta/np.asarray(list(model.pm_dt.extract_values().values()))
+        fig4, axs = plt.subplots(1)
+        axs.plot(tall_int, eta)
+        axs.set_ylabel(f""r"$\eta_t$")
+        axs.set_xlabel("Period n")
+        fig4.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\report\\ramseyreport\\eta_model1_t{t}")
+
+        fig5, axs = plt.subplots(1)
+        axs.plot(tall_int, theta)
+        axs.set_ylabel(f""r"$\theta_t$")
+        axs.set_xlabel("Period n")
+        fig5.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\report\\ramseyreport\\theta_model1_t{t}")

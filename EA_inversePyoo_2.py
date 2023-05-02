@@ -170,7 +170,7 @@ for i in range(ABs.shape[1]):
             axs[0, 1].set_ylabel("Consumption")
             axs[0, 1].set_xlabel("Time")
             axs[0,1].set_title(
-                f"Using Optimized pm_welf \n and "r"$\delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\delta_t = 10 \ for \ t>2060$")
+                f"Optimized parameters \n and "r"$\Delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\Delta_t = 10 \ for \ t>2060$")
             axs[1, 0].plot(tall_int, vm_opt[1], 'k')
             axs[1, 0].set_ylabel("Capital")
             axs[1, 0].set_xlabel("Time")

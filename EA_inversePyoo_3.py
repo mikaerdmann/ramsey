@@ -1,6 +1,7 @@
 '''
 Author: Mika Erdmann
 This script contains the inverse Pyoo Model that implements the optimization of the parameters pm_welf (p_t), pm_cumdepr_new and pm_cumdepr_old by minimizing the difference to the EA_inverse.get_vm_opt() result.
+Pm_cumdepr_new and Pm_cumdepr_old are fixed for the periods with the same timesteps
 
 '''
 
@@ -176,13 +177,13 @@ for i in range(ABs.shape[1]):
             axs[2,1].set_ylim([-10, 10])
             axs[0, 0].plot(tall_int, vm_opt[0], 'b')
             axs[0, 0].set_ylabel("Consumption")
-            axs[0, 0].title.set_text("Optimal paths for euqal timesteps")
+            axs[0, 0].title.set_text("Optimal paths for equal timesteps")
             axs[0, 0].set_xlabel("Time")
             axs[0, 1].plot(tall_int, vm_run[0], 'b')
             axs[0, 1].set_ylabel("Consumption")
             axs[0, 1].set_xlabel("Time")
             axs[0,1].set_title(
-                f"Using Optimized pm_welf \n and "r"$\delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\delta_t = 10 \ for \ t>2060$")
+                f"Optimized parameters \n and "r"$\Delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\Delta_t = 10 \ for \ t>2060$")
             axs[1, 0].plot(tall_int, vm_opt[1], 'k')
             axs[1, 0].set_ylabel("Capital")
             axs[1, 0].set_xlabel("Time")

@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea 2 updates and figures">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inversePyoo.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inversePyoo_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inversePyoo_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo_3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EA_inversePyoo_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inverse_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/inverse_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EA_inversePyoo_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo_5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model1.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model1_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +81,7 @@
       <recent name="C:\Users\mikae\PycharmProjects\Ramseyvenv\venv\Lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.EA_inversePyoo_4">
+  <component name="RunManager" selected="Python.model1">
     <configuration name="EA_inversePyoo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,24 +92,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EA_inversePyoo.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="EA_inversePyoo_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ramsey" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EA_inversePyoo_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -167,20 +154,38 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="model1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ramsey" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.model1" />
       <item itemvalue="Python.EA_inversePyoo_4" />
       <item itemvalue="Python.EA_inversePyoo_5" />
       <item itemvalue="Python.EA_inversePyoo_3" />
-      <item itemvalue="Python.EA_inversePyoo_2" />
       <item itemvalue="Python.EA_inversePyoo" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.model1" />
         <item itemvalue="Python.EA_inversePyoo_4" />
         <item itemvalue="Python.EA_inversePyoo_5" />
         <item itemvalue="Python.EA_inversePyoo_3" />
         <item itemvalue="Python.EA_inversePyoo" />
-        <item itemvalue="Python.EA_inversePyoo_2" />
       </list>
     </recent_temporary>
   </component>
@@ -354,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682932632685</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="7.7 inverse ea 2 updates and figures">
+      <created>1682934525977</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1682934525977</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -401,23 +413,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/EA_inversePyoo_3.py</url>
-          <line>123</line>
+          <line>124</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/EA_inversePyoo_3.py</url>
-          <line>132</line>
+          <line>133</line>
           <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/EA_inversePyoo_4.py</url>
-          <line>47</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/EA_inversePyoo_4.py</url>
-          <line>49</line>
-          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

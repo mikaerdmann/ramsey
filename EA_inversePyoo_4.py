@@ -1,7 +1,7 @@
 '''
 Author: Mika Erdmann
 This script contains the inverse Pyoo Model that implements the optimization of the parameters pm_welf (p_t), pm_cumdepr_new and pm_cumdepr_old by minimizing the difference to the EA_inverse.get_vm_opt() result.
-
+Pm_cumdepr_new, Pm_cumdepr_old and pm_welf are fixed for the periods with the same timesteps
 '''
 
 from geneal.genetic_algorithms import ContinuousGenAlgSolver
@@ -51,8 +51,6 @@ def ramsey_inverse(x):
     results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf,depr= 0,c_n = cumdepr_new2, c_o = cumdepr_old2, delta_kap=d_kap)
     vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
               inverse_functions.get_val(results.vm_invMacro)]
-
-    #         (vm_opt[2][9 - int(n / 2):8 + int(n / 2)] - vm_run[2][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1))
     residuals2 = np.sqrt(
         sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
             (vm_opt[2] - vm_run[2]) ** 2,
@@ -65,9 +63,9 @@ pm_cumdepr_new_list = list(pm_cumdepr_new.values())
 pm_cumdepr_new_array = np.asarray(pm_cumdepr_new_list)
 pm_cumdepr_old_list = list(pm_cumdepr_old.values())
 pm_cumdepr_old_array = np.asarray(pm_cumdepr_old_list)
-d_kap = 0.08
+d_kap = 0.05
 pm_welf = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 7.5, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
-Ti = [0]
+Ti = [1, 0]
 As = [8]
 Bs = [10]
 ABs = np.asarray([As,Bs])
@@ -97,8 +95,7 @@ for i in range(ABs.shape[1]):
             #         (vm_opt[1][9 - int(n / 2):8 + int(n / 2)] - vm_run[1][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
             #         (vm_opt[2][9 - int(n / 2):8 + int(n / 2)] - vm_run[2][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1))
             print(f" The residuals are: {residuals1}")
-            residuals2 = np.sqrt(
-                sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
+            residuals2 = np.sqrt(sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
                     (vm_opt[2] - vm_run[2]) ** 2,
                     1))
             print(f"The residuals over the whole time are {residuals2}")
@@ -127,7 +124,7 @@ for i in range(ABs.shape[1]):
             #algorithm = ES(n_offsprings=200, rule=1.0 / 7.0)
 
             #termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=100,n_max_evals=1000)
-            termination = get_termination("time", "00:10:00")
+            termination = get_termination("time", "00:50:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
@@ -161,8 +158,7 @@ for i in range(ABs.shape[1]):
             #         (vm_opt[1][9 - int(n / 2):8 + int(n / 2)] - vm_run[1][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1) + sum(
             #         (vm_opt[2][9 - int(n / 2):8 + int(n / 2)] - vm_run[2][9 - int(n / 2):8 + int(n / 2)]) ** 2, 1))
             #print(f" The residuals over the {n} time steps around 2060 are: {residuals1}")
-            residuals_all = np.sqrt(sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
-                (vm_opt[2] - vm_run[2]) ** 2, 1))
+            residuals_all = np.sqrt(sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum((vm_opt[2] - vm_run[2]) ** 2, 1))
             residuals_t = np.sqrt((vm_opt[0] - vm_run[0]) ** 2 + (vm_opt[1] - vm_run[1]) ** 2 + (vm_opt[2] - vm_run[2]) ** 2)
 
             print(f"The residuals over the whole time are {residuals_all}")
@@ -179,13 +175,13 @@ for i in range(ABs.shape[1]):
             axs[2,1].set_ylim([-10, 10])
             axs[0, 0].plot(tall_int, vm_opt[0], 'b')
             axs[0, 0].set_ylabel("Consumption")
-            axs[0, 0].title.set_text("Optimal paths for euqal timesteps")
+            axs[0, 0].title.set_text("Optimal paths for equal timesteps")
             axs[0, 0].set_xlabel("Time")
             axs[0, 1].plot(tall_int, vm_run[0], 'b')
             axs[0, 1].set_ylabel("Consumption")
             axs[0, 1].set_xlabel("Time")
             axs[0,1].set_title(
-                f"Using Optimized pm_welf \n and "r"$\delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\delta_t = 10 \ for \ t>2060$")
+                f"Using Optimized parameters \n and "r"$\Delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\Delta_t = 10 \ for \ t>2060$")
             axs[1, 0].plot(tall_int, vm_opt[1], 'k')
             axs[1, 0].set_ylabel("Capital")
             axs[1, 0].set_xlabel("Time")

@@ -124,7 +124,7 @@ for t in Ti:
         axs[0, 1].set_ylabel("Consumption")
         axs[0, 1].set_xlabel("Time")
         axs[0, 1].title.set_text(
-            f"Using Optimized pm_welf \n and "r"$\delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\delta_t = 10 \ for \ t>2060$")
+            f"Using Optimized pm_welf \n and "r"$\Delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\Delta_t = 10 \ for \ t>2060$")
         axs[1, 0].plot(tall_int, vm_opt[1], 'k')
         axs[1, 0].set_ylabel("Capital")
         axs[1, 0].set_xlabel("Time")
@@ -143,7 +143,7 @@ for t in Ti:
         fig2.set_title("Residuals per time step")
         fig2.show()
 
-        eta = np.asarray(pm_welf)/((1-0.03)**(np.asarray(tall_int)-2005))
+        eta = np.asarray(pm_welf)/((1+0.03)**(np.asarray(tall_int)-2005))
     #fig.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\Results\\06042023\\Benchmark_n{n}.png")
     #fig2.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\Results\\06042023\\Opt_n{n}.png")
     #fig3.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\Results\\06042023\\Residuals_opt_n{n}.png")
