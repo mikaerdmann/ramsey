@@ -88,7 +88,7 @@ for t in Ti:
         x0 = denormalize(np.random.random(Problem.n_var), Problem.xl, Problem.xu)
         algorithm = CMAES(x0=x0, sigma=0.1, restarts=11, restart_from_best=True, bipop=True)
         # termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=20,n_max_gen=1000,n_max_evals=100000)
-        termination = get_termination("time", "00:15:00")
+        termination = get_termination("time", "00:05:00")
 
         # algorithm = NSGA2()
         # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
@@ -140,7 +140,7 @@ for t in Ti:
 
         fig2, axs = plt.subplots(1)
         axs.plot(tall_int, residuals3)
-        fig2.set_title("Residuals per time step")
+        fig2.suptitle("Residuals per time step")
         fig2.show()
 
         eta = np.asarray(pm_welf)/((1+0.03)**(np.asarray(tall_int)-2005))

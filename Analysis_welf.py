@@ -5,6 +5,8 @@ Project: Ramsey model and time steps
 This script analyses the different welfare weight representations
 '''
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
+
 import main_run as main
 import pyomo.environ as pyo
 
@@ -17,8 +19,8 @@ investment: int = 2
 
 # Visualisation of model runs in a loop
 plt.figure()
+rcParams['figure.figsize'] = 8,3
 plt.subplots_adjust(hspace=0.8, top=0.8)
-plt.suptitle(f"Comparison welfare weightings.\ntime= {t}, Investement = {investment}", fontsize=18, y=0.95)
 counter = 1
 for i in range(0, len(weights)):
     model = main.run_experiment(t, weights[i],investment)
@@ -39,17 +41,17 @@ for i in range(0, len(weights)):
     # Axis creation
     plt.subplot(2, 3, counter)
     plt.plot(tall_int, cons_opt, 'b')
-    plt.ylabel("Consumption")
-    plt.xlabel("Time")
-    plt.subplot(2,3,counter+1)
-    plt.title(f"Time: {t}. Welf_weight: {weights[i]}. Welfare: {pyo.value(model.v_welfare)}", loc= "center")
+    if i == 0:
+        plt.ylabel("Consumption")
+    plt.subplot(2, 3, counter + 1)
+    plt.title(f""r"$p_t$""" + f": {weights[i]}. Cum_depr: standard", loc="center")
     plt.plot(tall_int, cap_opt, 'k')
-    plt.ylabel("Kapital")
-    plt.xlabel("Time")
-    plt.subplot(2,3,counter+2)
+    if i == 0:
+        plt.ylabel("Kapital")
+    plt.subplot(2, 3, counter + 2)
     plt.plot(tall_int, inv_opt, "r")
-    plt.ylabel("Investment")
-    plt.xlabel("Time")
+    if i == 0:
+        plt.ylabel("Investment")
     counter = counter +3
-plt.show()
-
+plt.tight_layout()
+plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Results_comp_t2_welf")

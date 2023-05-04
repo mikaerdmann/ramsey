@@ -126,7 +126,7 @@ for i in range(ABs.shape[1]):
             #algorithm = ES(n_offsprings=200, rule=1.0 / 7.0)
 
             #termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=100,n_max_evals=1000)
-            termination = get_termination("time", "00:25:00")
+            termination = get_termination("time", "00:50:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
@@ -164,8 +164,8 @@ for i in range(ABs.shape[1]):
             fig3, axs = plt.subplots(3, 2)
             axs[0,0].set_ylim([0, 10])
             axs[0,1].set_ylim([0, 10])
-            axs[1,0].set_ylim([0, 45])
-            axs[1,1].set_ylim([0, 45])
+            axs[1,0].set_ylim([0, 55])
+            axs[1,1].set_ylim([0, 55])
             axs[2,0].set_ylim([-10, 10])
             axs[2,1].set_ylim([-10, 10])
             axs[0, 0].plot(tall_int, vm_opt[0], 'b')
@@ -192,12 +192,5 @@ for i in range(ABs.shape[1]):
 
             #fig3.suptitle(f"Pyomo model using optimized pm_welf with n = {N} and optimizing over all residuals.")
 
-            fig2, axs = plt.subplots(1)
-            axs.plot(tall_int, residuals_t)
-            fig2.suptitle("Residuals per time step")
-        #   fig.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\Results\\06042023\\Benchmark_n{n}.png")
-        #   fig2.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\Results\\06042023\\Opt_n{n}.png")
-        #   fig3.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\Results\\06042023\\Residuals_opt_n{n}.png")
-        #print(f"Residuals all: {Residuals_all}")
-        #print(f"Residuals per timestep: {Residuals_t}")
+
 
