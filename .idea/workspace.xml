@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea 2 updates and figures">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis_Investment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_Investment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Analysis_welf.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_welf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EA_inversePyoo.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EA_inversePyoo_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/EA_inversePyoo_5.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +76,7 @@
       <recent name="C:\Users\mikae\PycharmProjects\Ramseyvenv\venv\Lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.EA_inversePyoo">
+  <component name="RunManager" selected="Python.Analysis_welf">
     <configuration name="Analysis_Investment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -125,6 +123,9 @@
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -161,6 +162,9 @@
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -184,10 +188,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.EA_inversePyoo" />
-        <item itemvalue="Python.EA_inversePyoo_5" />
-        <item itemvalue="Python.Analysis_Investment" />
         <item itemvalue="Python.Analysis_welf" />
+        <item itemvalue="Python.EA_inversePyoo_5" />
+        <item itemvalue="Python.EA_inversePyoo" />
+        <item itemvalue="Python.Analysis_Investment" />
         <item itemvalue="Python.model1" />
       </list>
     </recent_temporary>
@@ -376,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683038788804</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="7.7 inverse ea 2 updates and figures">
+      <created>1683200293490</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1683200293490</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

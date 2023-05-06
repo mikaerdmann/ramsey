@@ -122,11 +122,11 @@ for i in range(ABs.shape[1]):
             np.random.seed(1)
             Problem = Ramsey()
             x0 = np.append( [pm_cumdepr_new_array[1], pm_cumdepr_new_array[16]],  [pm_cumdepr_old_array[1], pm_cumdepr_old_array[16]])
-            algorithm = CMAES(x0=x0, sigma=0.09, restarts=11, restart_from_best=True, bipop=True)
+            algorithm = CMAES(x0=x0, sigma=0.4, restarts=11, restart_from_best=True, bipop=True)
             #algorithm = ES(n_offsprings=200, rule=1.0 / 7.0)
 
             #termination = DefaultSingleObjectiveTermination(xtol=1e-8,cvtol=1e-6,ftol=1e-6,period=200,n_max_gen=100,n_max_evals=1000)
-            termination = get_termination("time", "00:50:00")
+            termination = get_termination("time", "00:05:00")
 
             # algorithm = NSGA2()
             # res = minimize(Problem,algorithm,seed=1, x0=np.random.random(Problem.n_var), verbose = True)
