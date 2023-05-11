@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pyplot as plt
 
 import EA_inverse
 import inverse_functions
@@ -32,52 +33,21 @@ cumdepr_old_d = [3.1653694 , 3.1653694 , 3.1653694 , 3.1653694 , 3.1653694 ,3.16
 pt_e = [5,5,5,5,5,5,5,7.5,10,10,10,10,10,10,10,10,10,10]
 cumdepr_new_e = [1.114,1.114,1.114,1.114,1.114,1.114,1.114,1.114,5.124,5.124,5.124,5.124,5.124,5.124,5.124,5.124,5.124,5.124]
 cumdepr_old_e = [3.880,3.880,3.880,3.880,3.880,3.880,3.880,3.880,2.414,2.414,2.414,2.414,2.414,2.414,2.414,2.414,2.414,2.414]
+letters = ["A","B","C","D","E"]
+
+# parameter lists:
+pt_list = [pt_a, pt_b, pt_c, pt_d, pt_e]
+cumderp_new_list = [cumdepr_new_a, cumdepr_new_b, cumdepr_new_c, cumdepr_new_d, cumdepr_new_e]
+cumderp_old_list = [cumdepr_old_a, cumdepr_old_b, cumdepr_old_c, cumdepr_old_d, cumdepr_old_e]
 
 # loop thorugh different parameters
+for i in range(0,len(pt_list)):
+    # plot results
+    results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, depr=0, c_o=cumdepr_old2, c_n=cumdepr_new2)
+    vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
+              inverse_functions.get_val(results.vm_invMacro)]
+    tall_string = model1_functions.f_tall_string_b()
+    tall_int = [int(i) for i in tall_string]
 
-# plot results
-results = inverse_functions.run_model1_inverse(timeswitch=2, vm_weight=pm_welf, depr=0, c_o=cumdepr_old2, c_n=cumdepr_new2)
-vm_run = [inverse_functions.get_val(results.vm_cons), inverse_functions.get_val(results.vm_cesIO),
-          inverse_functions.get_val(results.vm_invMacro)]
-tall_string = model1_functions.f_tall_string_b()
-tall_int = [int(i) for i in tall_string]
-
-residuals_all = np.sqrt(sum((vm_opt[0] - vm_run[0]) ** 2, 1) + sum((vm_opt[1] - vm_run[1]) ** 2, 1) + sum(
-    (vm_opt[2] - vm_run[2]) ** 2, 1))
-residuals_t = np.sqrt((vm_opt[0] - vm_run[0]) ** 2 + (vm_opt[1] - vm_run[1]) ** 2 + (vm_opt[2] - vm_run[2]) ** 2)
-
-print(f"The residuals over the whole time are {residuals_all}")
-print(f"The residuals per time step are {residuals_t}")
-#Residuals_all[i] = residuals2
-#Residuals_t[i] = residuals3
-# Axis creation
-fig3, axs = plt.subplots(3, 2)
-axs[0,0].set_ylim([0, 10])
-axs[0,1].set_ylim([0, 10])
-axs[1,0].set_ylim([0, 55])
-axs[1,1].set_ylim([0, 55])
-axs[2,0].set_ylim([-10, 10])
-axs[2,1].set_ylim([-10, 10])
-axs[0, 0].plot(tall_int, vm_opt[0], 'b')
-axs[0, 0].set_ylabel("Consumption")
-axs[0, 0].title.set_text("Optimal paths for equal timesteps")
-axs[0, 0].set_xlabel("Time")
-axs[0, 1].plot(tall_int, vm_run[0], 'b')
-axs[0, 1].set_ylabel("Consumption")
-axs[0, 1].set_xlabel("Time")
-axs[0,1].set_title(
-    f"Optimized parameters \n and "r"$\Delta_t = 5  \ for \  t < 2060$" + "\n and "r"$\Delta_t = 10 \ for \ t>2060$")
-axs[1, 0].plot(tall_int, vm_opt[1], 'k')
-axs[1, 0].set_ylabel("Capital")
-axs[1, 0].set_xlabel("Time")
-axs[1, 1].plot(tall_int, vm_run[1], 'k')
-axs[1, 1].set_ylabel("Capital")
-axs[1, 1].set_xlabel("Time")
-axs[2, 0].plot(tall_int, vm_opt[2], "r")
-axs[2, 0].set_ylabel("Investment")
-axs[2, 0].set_xlabel("Time")
-axs[2, 1].plot(tall_int, vm_run[2], "r")
-axs[2, 1].set_ylabel("Investment")
-axs[2, 1].set_xlabel("Time")
-
-#fig3.suptitle(f"Pyomo model using optimized pm_welf with n = {N} and optimizing over all residuals.")
+    # Axis creation
+    fig, axs = plt.subplots(3, 2)
