@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="7.7 inverse ea 2 updates and figures">
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="plot updates">
+      <change afterPath="$PROJECT_DIR$/InverseResultsPlot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Analysis_Investment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_Investment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Analysis_welf.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis_welf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +77,7 @@
       <recent name="C:\Users\mikae\PycharmProjects\Ramseyvenv\venv\Lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Analysis_welf">
+  <component name="RunManager" selected="Python.Analysis_Investment">
     <configuration name="Analysis_Investment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ramsey" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -190,10 +192,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Analysis_Investment" />
         <item itemvalue="Python.Analysis_welf" />
         <item itemvalue="Python.EA_inversePyoo_5" />
         <item itemvalue="Python.EA_inversePyoo" />
-        <item itemvalue="Python.Analysis_Investment" />
         <item itemvalue="Python.model1" />
       </list>
     </recent_temporary>
@@ -396,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683360974537</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="plot updates">
+      <created>1683804195669</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1683804195669</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -411,7 +420,8 @@
     <MESSAGE value="7.7 inverse ea updates" />
     <MESSAGE value="7.7 inverse ea 2 updates" />
     <MESSAGE value="7.7 inverse ea 2 updates and figures" />
-    <option name="LAST_COMMIT_MESSAGE" value="7.7 inverse ea 2 updates and figures" />
+    <MESSAGE value="plot updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="plot updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
