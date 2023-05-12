@@ -140,7 +140,7 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     return model
 
 if __name__ == "__main__":
-    rcParams['figure.figsize'] = 7, 7
+    rcParams['figure.figsize'] = 8, 3
     Ti = [1,2,3,4,5,6,7,8]
     timecase = ["Equal timesteps \n with "r"$\Delta_t = 5$", "Unequal timesteps \n with "r"$\Delta_t = 5$ for $t<2060$", "Equal timesteps \n with "r"$\Delta_t = 1$","Unqual timesteps \n with "r"$\Delta_t = 1$ for $t<2060$", "One time timestep change", "One time timestep change", "One time timestep change", "One time timestep change"]
     for t in Ti:
@@ -165,12 +165,12 @@ if __name__ == "__main__":
         tickstep = [[1, 2], [5, 20], [1, 5]]
         # Axis creation
         # Visualisation of model runs in a loop
-        fig3, axs = plt.subplots(3, 1)
+        fig3, axs = plt.subplots( 1,3)
         for a in range(0, 3):
             # Major ticks every 20, minor ticks every 5
             major_ticks = np.arange(-10, max(res[a]), tickstep[a][1])
             minor_ticks = np.arange(-10, max(res[a]), tickstep[a][0])
-            major_ticksx = np.arange(0, 2160, 25)
+            major_ticksx = np.arange(0, 2160, 50)
             minor_ticksx = np.arange(0, 2160, 5)
             axs[a].set_xticks(major_ticksx)
             axs[a].set_xticks(minor_ticksx, minor=True)
@@ -187,12 +187,13 @@ if __name__ == "__main__":
         axs[0].plot(tall_int, cons_opt, 'b')
         axs[0].scatter(tall_int, cons_opt, marker=".", linewidths=1, color="b")
         axs[0].set_ylabel("Consumption")
-        axs[0].set_title(f"Optimal paths for time case: \n {timecase[t-1]}")
-        #axs[0].set_xlabel("Time")
+        #axs[0].set_title(f"Optimal paths for time case: \n {timecase[t-1]}")
+        fig3.suptitle(f"Optimal paths for time case: \n {timecase[t-1]}")
+        axs[0].set_xlabel("Time")
         axs[1].plot(tall_int, cap_opt, 'k')
         axs[1].scatter(tall_int, cap_opt, marker=".", linewidths=1, color="k")
         axs[1].set_ylabel("Capital")
-        #axs[1].set_xlabel("Time")
+        axs[1].set_xlabel("Time")
         axs[2].plot(tall_int, inv_opt, 'r')
         axs[2].scatter(tall_int, inv_opt, marker=".", linewidths=1, color="r")
         axs[2].set_ylabel("Investment")
@@ -200,8 +201,8 @@ if __name__ == "__main__":
 
         plt.subplots_adjust(hspace=0.9, top=0.9)
         plt.tight_layout()
-        plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Outcomes_new\\Results_t{t}.png", dpi=500)
-
+        #plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Outcomes_new\\Results_t{t}_wide.png", dpi=500)
+        plt.show()
         # eta = np.asarray(list(model.pm_welf.extract_values().values())) / ((1 + 0.03) ** (np.asarray(tall_int) - 2005))
         # theta = eta/np.asarray(list(model.pm_dt.extract_values().values()))
         # fig4, axs = plt.subplots(1)

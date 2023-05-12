@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="plot updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InverseResultsPlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/InverseResultsPlot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model1.py" beforeDir="false" afterPath="$PROJECT_DIR$/model1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -415,7 +414,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683815874452</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="plot updates">
+      <created>1683888494759</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1683888494759</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
