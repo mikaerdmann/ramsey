@@ -140,7 +140,9 @@ def run_model(timeswitch, weight, depr, reg =0):  # Do not change reg = 0 here!
     return model
 
 if __name__ == "__main__":
+    rcParams['figure.figsize'] = 7, 7
     Ti = [1,2,3,4,5,6,7,8]
+    timecase = ["Equal timesteps \n with "r"$\Delta_t = 5$", "Unequal timesteps \n with "r"$\Delta_t = 5$ for $t<2060$", "Equal timesteps \n with "r"$\Delta_t = 1$","Unqual timesteps \n with "r"$\Delta_t = 1$ for $t<2060$", "One time timestep change", "One time timestep change", "One time timestep change", "One time timestep change"]
     for t in Ti:
         model = run_model(timeswitch=t, weight=1, depr= 2)
         print(pyo.summation(model.vm_welfare_t))
@@ -159,36 +161,57 @@ if __name__ == "__main__":
         inv_opt = list(results_inv)
         pm_tall_val = model.pm_tall_val.extract_values()
         tall_int = list(pm_tall_val.values())
-        print(cons_opt)
+        res = [cons_opt, cap_opt, inv_opt]
+        tickstep = [[1, 2], [5, 20], [1, 5]]
         # Axis creation
-        rcParams['figure.figsize'] = 8, 3
-        plt.clf()
-        plt.subplot(1, 3, 1)
-        plt.plot(tall_int, cons_opt, 'b')
-        plt.ylabel("Consumption")
-        plt.xlabel("Time")
-        plt.subplot(1, 3, 2)
-        plt.title(f"Optimal paths. Welfare: {pyo.value(model.v_welfare)}", loc="center")
-        plt.plot(tall_int, cap_opt, 'k')
-        plt.ylabel("Kapital")
-        plt.xlabel("Time")
-        plt.subplot(1, 3, 3)
-        plt.plot(tall_int, inv_opt, "r")
-        plt.ylabel("Investment")
-        plt.xlabel("Time")
-        #plt.tight_layout()
-        #plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Results_model1_t{t}.")
+        # Visualisation of model runs in a loop
+        fig3, axs = plt.subplots(3, 1)
+        for a in range(0, 3):
+            # Major ticks every 20, minor ticks every 5
+            major_ticks = np.arange(-10, max(res[a]), tickstep[a][1])
+            minor_ticks = np.arange(-10, max(res[a]), tickstep[a][0])
+            major_ticksx = np.arange(0, 2160, 25)
+            minor_ticksx = np.arange(0, 2160, 5)
+            axs[a].set_xticks(major_ticksx)
+            axs[a].set_xticks(minor_ticksx, minor=True)
+            axs[a].set_yticks(major_ticks)
+            axs[a].set_yticks(minor_ticks, minor=True)
+            # Or if you want different settings for the grids:
+            axs[a].grid(which='minor', alpha=0.2)
+            axs[a].grid(which='major', alpha=0.5)
 
-        eta = np.asarray(list(model.pm_welf.extract_values().values())) / ((1 + 0.03) ** (np.asarray(tall_int) - 2005))
-        theta = eta/np.asarray(list(model.pm_dt.extract_values().values()))
-        fig4, axs = plt.subplots(1)
-        axs.plot(tall_int, eta)
-        axs.set_ylabel(f""r"$\eta_t$")
-        axs.set_xlabel("Period n")
-        fig4.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\report\\ramseyreport\\eta_model1_t{t}")
+        axs[0].set_ylim(2, 10)
+        axs[1].set_ylim(0, 50)
+        axs[2].set_ylim(-8, 5)
+        # plot
+        axs[0].plot(tall_int, cons_opt, 'b')
+        axs[0].scatter(tall_int, cons_opt, marker=".", linewidths=1, color="b")
+        axs[0].set_ylabel("Consumption")
+        axs[0].set_title(f"Optimal paths for time case: \n {timecase[t-1]}")
+        #axs[0].set_xlabel("Time")
+        axs[1].plot(tall_int, cap_opt, 'k')
+        axs[1].scatter(tall_int, cap_opt, marker=".", linewidths=1, color="k")
+        axs[1].set_ylabel("Capital")
+        #axs[1].set_xlabel("Time")
+        axs[2].plot(tall_int, inv_opt, 'r')
+        axs[2].scatter(tall_int, inv_opt, marker=".", linewidths=1, color="r")
+        axs[2].set_ylabel("Investment")
+        axs[2].set_xlabel("Time")
 
-        fig5, axs = plt.subplots(1)
-        axs.plot(tall_int, theta)
-        axs.set_ylabel(f""r"$\theta_t$")
-        axs.set_xlabel("Period n")
-        fig5.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\report\\ramseyreport\\theta_model1_t{t}")
+        plt.subplots_adjust(hspace=0.9, top=0.9)
+        plt.tight_layout()
+        plt.savefig(f"C:\\Users\\mikae\\Documents\\Uni\Project 1\\report\\ramseyreport\\Outcomes_new\\Results_t{t}.png", dpi=500)
+
+        # eta = np.asarray(list(model.pm_welf.extract_values().values())) / ((1 + 0.03) ** (np.asarray(tall_int) - 2005))
+        # theta = eta/np.asarray(list(model.pm_dt.extract_values().values()))
+        # fig4, axs = plt.subplots(1)
+        # axs.plot(tall_int, eta)
+        # axs.set_ylabel(f""r"$\eta_t$")
+        # axs.set_xlabel("Period n")
+        # #fig4.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\report\\ramseyreport\\eta_model1_t{t}")
+        #
+        # fig5, axs = plt.subplots(1)
+        # axs.plot(tall_int, theta)
+        # axs.set_ylabel(f""r"$\theta_t$")
+        # axs.set_xlabel("Period n")
+        # #fig5.savefig(f"C:\\Users\\mikae\\Documents\\Uni\\Project 1\\report\\ramseyreport\\theta_model1_t{t}")
