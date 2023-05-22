@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="plot updates">
-      <change afterPath="$PROJECT_DIR$/model1_deprmodi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ce1c5588-278a-4288-ba74-802467fb82cf" name="Changes" comment="model1_deprmodi.py new" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -431,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683903103648</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="model1_deprmodi.py new">
+      <created>1684743004608</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1684743004608</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -447,7 +451,8 @@
     <MESSAGE value="7.7 inverse ea 2 updates" />
     <MESSAGE value="7.7 inverse ea 2 updates and figures" />
     <MESSAGE value="plot updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="plot updates" />
+    <MESSAGE value="model1_deprmodi.py new" />
+    <option name="LAST_COMMIT_MESSAGE" value="model1_deprmodi.py new" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
